@@ -368,13 +368,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-<nav>
+<!-- <nav>
     <div class="logo">Bobony Family</div>
     <div class="nav-right">
         <span><?php echo htmlspecialchars($username); ?></span>
         <a href="logout.php">Logout</a>
     </div>
-</nav>
+</nav> -->
 
 <div class="container">
     <div class="page-title">
@@ -461,7 +461,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </button>
             <a href="ban_management.php" class="btn btn-cancel">
                 <i class="fas fa-times"></i> Cancel
-            <ul>
+            <!-- <ul>
                 <li><a href="home.php">Home</a></li>
                 <li><a href="discord.php">Discord</a></li>
                 <li><a href="team.php">Team</a></li>
@@ -470,4 +470,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner'): ?>
                     <li><a href="create_user.php" style="color: red;">Create User</a></li>
                 <?php endif; ?>
-            </ul>
+            </ul> -->

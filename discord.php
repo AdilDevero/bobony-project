@@ -146,11 +146,11 @@
 <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="discord.html">Discord</a></li>
-        <li><a href="team.html">Team</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="discord.php">Discord</a></li>
+        <li><a href="team.php">Team</a></li>
         <li><a href="bans.php">Bans</a></li>
-        <li><a href="REGLEMENTS.html">REGLEMENTS</a></li>
+        <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
         <li><a href="login.php" style="color: red;">Staff Login</a></li>
     </ul>
 </nav>
@@ -163,24 +163,19 @@
 
         <div class="discord-card">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord Logo">
-            <h3>Main Discord Server</h3>
-            <p>Official Bobony Roleplay Discord server.</p>
-            <a href="https://discord.gg/YOURINVITELINK" target="_blank">Join Now</a>
+            <h3>Bobony Family</h3>
+            <p>Official Bobony Family Discord server.</p>
+            <a href="https://discord.gg/sPX9zQKXC9" target="_blank">Join Now</a>
         </div>
 
         <div class="discord-card">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Support">
-            <h3>Support & Tickets</h3>
-            <p>Open tickets and contact administration team.</p>
-            <a href="https://discord.gg/YOURSUPPORTLINK" target="_blank">Open Ticket</a>
+            <h3>Bobony RolePlay</h3>
+            <p>Official Bobony Roleplay Discord server.</p>
+            <a href="https://discord.gg/bobony-roleplay-1167631174588448790" target="_blank">Join Now</a>
         </div>
 
-        <div class="discord-card">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Announcements">
-            <h3>Announcements</h3>
-            <p>Stay updated with events and updates.</p>
-            <a href="https://discord.gg/YOURANNOUNCELINK" target="_blank">View Updates</a>
-        </div>
+        
 
     </div>
 </div>

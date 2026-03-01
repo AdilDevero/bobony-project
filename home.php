@@ -210,25 +210,25 @@ footer {
         <div class="timeline">
 
             <div class="timeline-item">
-                <span>2019</span>
+                <span> 2019</span>
                 <h3>Bobony Family 1.0</h3>
                 <p>The foundation of our immersive roleplay community began.</p>
             </div>
 
             <div class="timeline-item">
-                <span>2024</span>
+                <span> 2024</span>
                 <h3>Bobony Family 2.0</h3>
                 <p>Advanced scripts, improved economy and new systems introduced.</p>
             </div>
 
             <div class="timeline-item">
-                <span>2025</span>
+                <span> 2025</span>
                 <h3>Bobony Family 3.0</h3>
                 <p>Major expansion with high-quality RP mechanics and active content creators.</p>
             </div>
 
             <div class="timeline-item">
-                <span>2026 - Today</span>
+                <span> 2026 - Today</span>
                 <h3>Bobony Family V</h3>
                 <p>Next generation roleplay experience built for serious players.</p>
             </div>
