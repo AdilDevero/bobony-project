@@ -1,0 +1,66 @@
+-- Bobony Family Staff Login System - Database Setup
+-- Run this SQL to set up the database
+
+-- Create Database
+CREATE DATABASE IF NOT EXISTS bobony_db;
+USE bobony_db;
+
+-- Create Staff Table
+CREATE TABLE IF NOT EXISTS staff (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'moderator', 'staff') NOT NULL DEFAULT 'staff',
+    status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP NULL,
+    email VARCHAR(100) NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insert staff login account (plain text password used: admin123)
+INSERT INTO staff (username, password, role, status, email) VALUES 
+('admin', 'admin123', 'admin', 'active', 'admin@bobony.com');
+
+-- Create Activity Log Table (optional)
+CREATE TABLE IF NOT EXISTS activity_log (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    staff_id INT NOT NULL,
+    action VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create Bans Table
+CREATE TABLE IF NOT EXISTS bans (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    discord_username VARCHAR(100) NOT NULL,
+    discord_id VARCHAR(50) NOT NULL UNIQUE,
+    ban_reason VARCHAR(255) NOT NULL,
+    ban_duration INT NOT NULL COMMENT 'Duration in hours (0 for permanent)',
+    ban_count INT DEFAULT 1,
+    is_permanent BOOLEAN DEFAULT FALSE,
+    is_blacklisted BOOLEAN DEFAULT FALSE,
+    banned_by INT NOT NULL,
+    banned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    unban_date DATETIME NULL,
+    status ENUM('active', 'appealed', 'unbanned') DEFAULT 'active',
+    notes TEXT NULL,
+    FOREIGN KEY (banned_by) REFERENCES staff(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/* 
+HOW TO USE:
+1. Install XAMPP or any local PHP/MySQL server
+2. Create a new database or run the SQL above in phpMyAdmin
+3. Update the config.php file with your database credentials:
+   - DB_HOST: usually 'localhost'
+   - DB_USER: usually 'root'
+   - DB_PASSWORD: your MySQL password (empty by default)
+   - DB_NAME: 'bobony_db'
+
+4. Login with:
+   - Username: admin
+   - Password: admin123
+
+5. Access the login page at: http://localhost/bobony/login.php
+*/

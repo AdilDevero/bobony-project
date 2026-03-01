@@ -22,33 +22,46 @@
             color: white;
         }
 
-        header {
-            background: #111;
-            padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #ff0000;
+        /* NAVBAR */
+
+        nav{
+            position:fixed;
+            width:100%;
+            padding:20px 80px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:rgba(0,0,0,0.8);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid rgba(255,0,0,0.3);
+            z-index:1000;
         }
 
-        header h1 {
-            color: #ff0000;
+        .logo{
+            font-weight:800;
+            font-size:22px;
+            color:red;
+            letter-spacing:2px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: 500;
-            transition: 0.3s;
+        nav ul{
+            display:flex;
+            gap:30px;
+            list-style:none;
         }
 
-        nav a:hover {
-            color: #ff0000;
+        nav ul li a{
+            text-decoration:none;
+            color:#ccc;
+            transition:0.3s;
+        }
+
+        nav ul li a:hover{
+            color:red;
         }
 
         .container {
-            padding: 80px 10%;
+            padding: 150px 10% 80px;
             text-align: center;
         }
 
@@ -130,15 +143,17 @@
 
 <body>
 
-<header>
-    <h1>Bobony Roleplay</h1>
-    <nav>
-        <a href="home.html">Home</a>
-        <a href="discord.html">Discord</a>
-        <a href="team.html">Team</a>
-        <a href="REGLEMENTS.html">REGLEMENTS</a>
-    </nav>
-</header>
+<nav>
+    <div class="logo">Bobony Family</div>
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="discord.html">Discord</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="bans.php">Bans</a></li>
+        <li><a href="REGLEMENTS.html">REGLEMENTS</a></li>
+        <li><a href="login.php" style="color: red;">Staff Login</a></li>
+    </ul>
+</nav>
 
 <div class="container">
     <h2>Join Our Discord Community</h2>

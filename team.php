@@ -51,7 +51,7 @@ nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background:rgba(0,0,0,0.85);
+    background:rgba(0,0,0,0.8);
     backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(255,0,0,0.3);
     z-index:1000;
@@ -196,7 +196,9 @@ nav ul li a:hover,
          <li><a href="home.html">Home</a></li>
         <li><a href="discord.html">Discord</a></li>
         <li><a href="team.html">Team</a></li>
+        <li><a href="bans.php">Bans</a></li>
         <li><a href="REGLEMENTS.html">REGLEMENTS</a></li>
+        <li><a href="login.php" style="color: red;">Staff Login</a></li>
     </ul>
 </nav>
 
