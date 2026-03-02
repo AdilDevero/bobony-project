@@ -115,11 +115,11 @@
 <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="discord.html">Discord</a></li>
-        <li><a href="team.html">Team</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="discord.php">Discord</a></li>
+        <li><a href="team.php">Team</a></li>
         <li><a href="bans.php">Bans</a></li>
-        <li><a href="REGLEMENTS.html">REGLEMENTS</a></li>
+        <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
         <li><a href="login.php" style="color: red;">Staff Login</a></li>
     </ul>
 </nav>
@@ -180,6 +180,71 @@
 
     </div>
 
+    <!-- HEIST / BRAQUAGES RULES -->
+    <div class="section">
+        <h2>Heist Rules</h2>
+
+        <div class="rule-box">
+            <strong>Shop Robbery</strong>
+            <ul>
+                <li>Criminals: Minimum: 1 vehicle + 2 criminals. Maximum: 1 vehicle + 4 criminals.</li>
+                <li>Once the police pursuit begins, you cannot stop to use repair kits or refuel. You are fully responsible for your vehicle and decisions.</li>
+                <li>At least one criminal must always stay with the hostage. If the hostage is left alone, police are allowed to intervene, and arrest everyone involved.</li>
+                <li>Getting arrested more than once in the same day will increase your fine: 2nd arrest: x2 fine; 3rd arrest: x3 fine (and so on).</li>
+                <li>You must have a weapon (Melee or Pistol) and a real hostage to initiate the robbery.</li>
+                <li>Escape using motorcycles is strictly prohibited (cars only).</li>
+            </ul>
+        </div>
+
+        <div class="rule-box">
+            <strong>Laundromat Heist</strong>
+            <ul>
+                <li>Criminals: Minimum: 1 vehicle + 2 criminals + 1 hostage. Maximum: 1 vehicle + 4 criminals + 2 hostages.</li>
+                <li>Police: Minimum: 2 vehicles + 4 officers. Maximum: 4 vehicles + 8 officers.</li>
+            </ul>
+        </div>
+
+        <div class="rule-box">
+            <strong>Cash Exchange Heist</strong>
+            <ul>
+                <li>Criminals: Minimum: 1 vehicle + 2 criminals + 1 hostage. Maximum: 1 vehicle + 4 criminals + 2 hostages.</li>
+                <li>Police: Minimum: 2 vehicles + 4 officers. Maximum: 4 vehicles + 8 officers.</li>
+            </ul>
+        </div>
+
+        <div class="rule-box">
+            <strong>Fleeca Robbery (Cooldown 1 week)</strong>
+            <ul>
+                <li>Criminals: Minimum: 1 vehicle + 2 criminals + 2 hostages + 2 pistols. Maximum: 1 vehicle + 4 criminals + 4 hostages.</li>
+                <li>Police: Minimum: 3 vehicles + 6 officers. Maximum: 4 vehicles + 8 officers.</li>
+            </ul>
+        </div>
+
+        <div class="rule-box">
+            <strong>Pacific Robbery (Cooldown 1 week)</strong>
+            <ul>
+                <li>Criminals: Minimum: 2 vehicles + 8 criminals + 3 hostages (all armed). Maximum: 3 vehicles + 10 criminals + 6 hostages (all armed).</li>
+                <li>Police: Minimum: 6 vehicles + 12 officers + 2 helicopters (4 officers). Maximum: 9 vehicles + 18 officers + 2 helicopters (4 officers).</li>
+            </ul>
+        </div>
+
+        <div class="rule-box">
+            <strong>FIB Heist</strong>
+            <ul>
+                <li>Criminals: Minimum: 1 vehicle + 4 criminals + 2 hostages + 2 pistols. Maximum: 2 vehicles + 6 criminals + 4 hostages.</li>
+                <li>Police: Minimum: 4 vehicles + 7 officers + 1 helicopter. Maximum: 6 vehicles + 12 officers + 1 helicopter.</li>
+            </ul>
+        </div>
+
+        <div class="rule-box">
+             <strong>LANCEMENT BRAQUAGE</strong> 
+        </div>
+
+        <div class="rule-box">
+            ALL GANGS: LI KAYLO7O LES BRAQUAGES F DISCORD O KAYKON 3ANDHOM L OK ANAHO APPROUVE, 3ANDKOM MAXIMUM 30MIN BACH TLANCER BRAQUAGE DIALAK SINN POLICE GHADI ANNULIWH ! HADO LES BRAQUAGES CONCERNED: Art Heist, Jewellery Heist, Fleeca Robbery, Paleto Robbery, Pacific Robbery
+        </div>
+
+    </div>
 </div>
 
 <footer>
