@@ -14,8 +14,28 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $conn->real_escape_string(trim($_POST['username'] ?? ''));
     $password = $_POST['password'] ?? '';
-    $role = $conn->real_escape_string($_POST['role'] ?? 'staff');
-    $email = $conn->real_escape_string(trim($_POST['email'] ?? null));
+    $submitted_role = trim($_POST['role'] ?? 'staff');
+    $email = trim($_POST['email'] ?? '');
+
+    $allowed_roles = ['staff'];
+    $column_default = 'staff';
+    $schema_sql = "SELECT COLUMN_TYPE, COLUMN_DEFAULT FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'staff' AND COLUMN_NAME = 'role' LIMIT 1";
+    if ($schema_res = $conn->query($schema_sql)) {
+        if ($schema_row = $schema_res->fetch_assoc()) {
+            $column_type = $schema_row['COLUMN_TYPE'];
+            $column_default = $schema_row['COLUMN_DEFAULT'] ?? $column_default;
+            if (preg_match_all("/'([^']+)'/", $column_type, $matches)) {
+                $allowed_roles = $matches[1];
+            }
+        }
+        $schema_res->free();
+    }
+
+    if (!in_array($submitted_role, $allowed_roles, true)) {
+        $role = $column_default ?: ($allowed_roles[0] ?? 'staff');
+    } else {
+        $role = $submitted_role;
+    }
 
     if ($username === '' || $password === '') {
         $error = 'Username and password are required.';
@@ -27,9 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Username is already taken.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $insert_sql = "INSERT INTO staff (username, password, role, status, email, created_at) VALUES ('" . $username . "', '" . $hash . "', '" . $role . "', 'active', '" . ($email ?: '') . "', NOW())";
-            if ($conn->query($insert_sql)) {
-                $success = 'User created successfully.';
+            $stmt = $conn->prepare("INSERT INTO staff (username, password, role, status, email, created_at) VALUES (?, ?, ?, 'active', ?, NOW())");
+            if ($stmt) {
+                $email_param = $email ?: '';
+                $stmt->bind_param('ssss', $username, $hash, $role, $email_param);
+                if ($stmt->execute()) {
+                    $success = 'User created successfully.';
+                } else {
+                    $error = 'Database error: ' . $stmt->error;
+                }
+                $stmt->close();
             } else {
                 $error = 'Database error: ' . $conn->error;
             }
@@ -46,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Create Staff User — Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
     <style>
         *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
         body{background:#070707;color:white;overflow-x:hidden}

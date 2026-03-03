@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS staff (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'moderator', 'staff') NOT NULL DEFAULT 'staff',
+    role ENUM('admin', 'owner', 'staff') NOT NULL DEFAULT 'staff',
     status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP NULL,
