@@ -1,6 +1,5 @@
 <?php
-require 'config.php';
-session_start();
+require 'config.php'; // config.php already starts the session
 
 // Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -10,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $role = $_SESSION['role'] ?? '';
 $error = '';
-$success = '';
 $editing = false;
 $editData = ['id'=>'', 'name'=>'', 'image'=>'', 'link1'=>'', 'link2'=>''];
 
@@ -20,14 +18,13 @@ if (!is_dir($upload_dir)) {
 }
 
 /* ===========================
-   DELETE (Redirect to Dashboard)
+   DELETE STREAMER
 =========================== */
 if (isset($_POST['delete_id'])) {
     if ($role === 'owner' || $role === 'admin') {
-
         $id = (int)$_POST['delete_id'];
 
-        // get image path to delete file too
+        // Get image path
         $getImg = $conn->prepare("SELECT image FROM streamers WHERE id=?");
         $getImg->bind_param("i", $id);
         $getImg->execute();
@@ -36,24 +33,19 @@ if (isset($_POST['delete_id'])) {
         $getImg->close();
 
         $stmt = $conn->prepare("DELETE FROM streamers WHERE id=?");
-        if ($stmt) {
-            $stmt->bind_param("i", $id);
-            if ($stmt->execute()) {
+        $stmt->bind_param("i", $id);
 
-                // delete image file from server
-                if (!empty($imgRow['image']) && file_exists($imgRow['image'])) {
-                    unlink($imgRow['image']);
-                }
-
-                $stmt->close();
-                header("Location: dashboard.php?msg=streamer_deleted");
-                exit();
-            } else {
-                $error = "Delete failed: " . $stmt->error;
+        if ($stmt->execute()) {
+            // Delete image file
+            if (!empty($imgRow['image']) && file_exists($imgRow['image'])) {
+                unlink($imgRow['image']);
             }
             $stmt->close();
+            header("Location: dashboard.php?msg=streamer_deleted");
+            exit();
+        } else {
+            $error = "Delete failed: " . $stmt->error;
         }
-
     } else {
         $error = "No permission to delete.";
     }
@@ -63,9 +55,7 @@ if (isset($_POST['delete_id'])) {
    LOAD EDIT DATA
 =========================== */
 if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['id'])) {
-
     $id = (int)$_GET['id'];
-
     $stmt = $conn->prepare("SELECT * FROM streamers WHERE id=? LIMIT 1");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -83,11 +73,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['id'])) 
    ADD / UPDATE STREAMER
 =========================== */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
-
     if ($role !== 'owner' && $role !== 'admin') {
         $error = "No permission.";
     } else {
-
         $name = trim($_POST['name'] ?? '');
         $link1 = trim($_POST['link1'] ?? '');
         $link2 = trim($_POST['link2'] ?? '');
@@ -96,18 +84,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
         $image = '';
 
         if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-
             $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-
             if (in_array($ext, ['jpg','jpeg','png','gif'])) {
-
                 $newname = uniqid('str_') . '.' . $ext;
                 $path = $upload_dir . $newname;
-
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
                     $image = $path;
+                } else {
+                    $error = "Failed to upload image.";
                 }
-
             } else {
                 $error = "Invalid image format.";
             }
@@ -116,13 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
         if ($name === '') {
             $error = "Streamer name required.";
         } else {
-
             if ($id > 0) {
-
                 if ($image === '') {
                     $image = $editData['image'];
                 }
-
                 $stmt = $conn->prepare("UPDATE streamers SET name=?, image=?, link1=?, link2=? WHERE id=?");
                 $stmt->bind_param("ssssi", $name, $image, $link1, $link2, $id);
 
@@ -132,11 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
                 } else {
                     $error = $stmt->error;
                 }
-
                 $stmt->close();
-
             } else {
-
                 $stmt = $conn->prepare("INSERT INTO streamers (name, image, link1, link2) VALUES (?,?,?,?)");
                 $stmt->bind_param("ssss", $name, $image, $link1, $link2);
 
@@ -146,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
                 } else {
                     $error = $stmt->error;
                 }
-
                 $stmt->close();
             }
         }
@@ -162,6 +140,8 @@ $streamers = $conn->query("SELECT * FROM streamers ORDER BY created_at DESC");
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
+
 <title>Streamers Panel</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -176,6 +156,7 @@ input{width:100%;padding:10px;border-radius:8px;margin-bottom:10px;border:1px so
 .btn.small{padding:6px 10px;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
 img{max-width:100%;border-radius:8px;margin-bottom:10px}
+form{margin:0}
 </style>
 </head>
 <body>
@@ -233,7 +214,7 @@ img{max-width:100%;border-radius:8px;margin-bottom:10px}
 
 <?php if ($role === 'owner' || $role === 'admin'): ?>
 <div style="margin-top:10px;">
-<a href="streamers.php?action=edit&id=<?php echo (int)$row['id']; ?>" class="btn small gray">Edit</a>
+<a href="streamers_panel.php?action=edit&id=<?php echo (int)$row['id']; ?>" class="btn small gray">Edit</a>
 
 <form method="POST" style="display:inline;">
 <input type="hidden" name="delete_id" value="<?php echo (int)$row['id']; ?>">
