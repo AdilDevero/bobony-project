@@ -48,6 +48,21 @@ CREATE TABLE IF NOT EXISTS bans (
     FOREIGN KEY (banned_by) REFERENCES staff(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Create Streamers Table
+CREATE TABLE IF NOT EXISTS streamers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    -- `image` stores the URL/path to the streamer's profile image
+    image VARCHAR(255) NULL,
+    link1 VARCHAR(255) NULL,
+    link2 VARCHAR(255) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- If you already created the table before this update, run:
+-- ALTER TABLE streamers CHANGE profile image VARCHAR(255) NULL;
+-- (and optionally DROP COLUMN profile if you don't need it)
+
 /* 
 HOW TO USE:
 1. Install XAMPP or any local PHP/MySQL server

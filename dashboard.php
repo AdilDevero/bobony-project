@@ -406,6 +406,7 @@ $recent_logins = $conn->query("SELECT username, last_login FROM staff WHERE last
     <div class="slogo">Bobony Family</div>
     <div class="greet">Hello, <?php echo htmlspecialchars($username); ?></div>
     <a href="ban_management.php" class="side-btn primary"><i class="fas fa-ban"></i><span>Ban Management</span></a>
+    <a href="streamers_panel.php" class="side-btn"><i class="fas fa-video"></i><span>Manage Streamers</span></a>
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner'): ?>
         <a href="create_user.php" class="side-btn"><i class="fas fa-user-plus"></i><span>Create User</span></a>
     <?php endif; ?>
@@ -453,13 +454,20 @@ $recent_logins = $conn->query("SELECT username, last_login FROM staff WHERE last
     </div>
 
     
-    <!-- <div class="management-menu">
+    <div class="management-menu">
         <a href="ban_management.php" class="menu-card">
             <div class="menu-icon"><i class="fas fa-ban"></i></div>
             <h3>Ban Management</h3>
-            <p>View & manage bans</p> -->
-        
-        <div class="content-grid">
+            <p>View & manage bans</p>
+        </a>
+        <a href="streamers_panel.php" class="menu-card">
+            <div class="menu-icon"><i class="fas fa-video"></i></div>
+            <h3>Manage Streamers</h3>
+            <p>Add, edit or remove streamers</p>
+        </a>
+    </div>
+    
+    <div class="content-grid">
         <div class="card">
             <h2>Your Profile</h2>
             <div class="profile-info">
@@ -505,6 +513,8 @@ $recent_logins = $conn->query("SELECT username, last_login FROM staff WHERE last
                 </tbody>
             </table>
         </div>
+
+    </div>
 
     </div>
 

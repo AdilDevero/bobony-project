@@ -120,6 +120,7 @@
         <li><a href="team.php">Team</a></li>
         <li><a href="bans.php">Bans</a></li>
         <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
+        <li><a href="streamers.php">Streamers</a></li>
         <li><a href="login.php" style="color: red;">Staff Login</a></li>
     </ul>
 </nav>
