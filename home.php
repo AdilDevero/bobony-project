@@ -239,7 +239,7 @@ footer {
 
 </section>
 <footer>
-    © 2026 Bobony Roleplay - All Rights Reserved
+    © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </footer>
 </body>
 </html>

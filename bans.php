@@ -512,7 +512,7 @@ $blacklisted = array_filter($bans, function($b) { return $b['is_blacklisted']; }
 <?php endif; ?>
 
 <div class="footer">
-    © 2026 Bobony Roleplay - All Rights Reserved
+    © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </div>
 
 </body>

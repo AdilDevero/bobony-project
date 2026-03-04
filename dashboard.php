@@ -521,7 +521,7 @@ $recent_logins = $conn->query("SELECT username, last_login FROM staff WHERE last
 </div>
 
 <div class="footer">
-    © 2026 Bobony Roleplay - All Rights Reserved
+    © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </div>
 
 </body>
