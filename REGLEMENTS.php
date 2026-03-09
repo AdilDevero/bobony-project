@@ -246,7 +246,35 @@
         </div>
 
     </div>
+     <!-- STREAMER RULES -->
+    <div class="section">
+        <h2>🚫 Blacklisted Words</h2>
+
+        <div class="rule-box">•
+The following words are strictly forbidden (IG & OOC):
+
+• Cringe 
+• l7ass 
+• 3ebad 
+• l9bar 
+• klawa
+
+Punishment:
+
+1st — Warning
+2nd — Ban 48h
+Repeated 
+
+.</div>
+        <!-- <div class="rule-box">• Must follow all server rules while streaming.</div>
+        <div class="rule-box">• OOC Insults strictly forbidden (no real-life insults, slurs, mocking).</div>
+        <div class="rule-box">• Saying “it’s jokes” or “stream content” is NOT an excuse.</div>
+        <div class="rule-box">• Violations → 48h Ban to PERMA.</div> -->
+
+    </div>
+    </div>
 </div>
+ 
 
 <footer>
     © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
