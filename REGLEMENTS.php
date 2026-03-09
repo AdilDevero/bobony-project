@@ -115,13 +115,13 @@
 <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-        <li><a href="home.php">Home</a></li>
-        <li><a href="discord.php">Discord</a></li>
-        <li><a href="team.php">Team</a></li>
-        <li><a href="bans.php">Bans</a></li>
-        <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
-        <li><a href="streamers.php">Streamers</a></li>
-        <li><a href="login.php" style="color: red;">Staff Login</a></li>
+<li><a href="home.php">Home</a></li>
+<li><a href="discord.php">Discord</a></li>
+<li><a href="team.php">Team</a></li>
+<li><a href="bans.php">Bans</a></li>
+<li><a href="annoucement.php">Announcements</a></li>
+<li><a href="REGLEMENTS.php">Reglements</a></li>
+<li><a href="login.php" style="color:red;">Staff Login</a></li>
     </ul>
 </nav>
 
@@ -250,26 +250,17 @@
     <div class="section">
         <h2>🚫 Blacklisted Words</h2>
 
-        <div class="rule-box">•
-The following words are strictly forbidden (IG & OOC):
-
-• Cringe 
-• l7ass 
-• 3ebad 
-• l9bar 
-• klawa
-
-Punishment:
-
-1st — Warning
+        <div class="rule-box">•The following words are strictly forbidden (IG & OOC):.</div>
+        <div class="rule-box">• Cringe.</div>
+        <div class="rule-box">• l7ass.</div>
+        <div class="rule-box">• 3ebad.</div>
+        <div class="rule-box">• l9bar.</div>
+        <div class="rule-box">• klawa.</div>
+        <div class="rule-box">• Punishment:</div>
+        <div class="rule-box">• 1st — Warning
 2nd — Ban 48h
-Repeated 
-
-.</div>
-        <!-- <div class="rule-box">• Must follow all server rules while streaming.</div>
-        <div class="rule-box">• OOC Insults strictly forbidden (no real-life insults, slurs, mocking).</div>
-        <div class="rule-box">• Saying “it’s jokes” or “stream content” is NOT an excuse.</div>
-        <div class="rule-box">• Violations → 48h Ban to PERMA.</div> -->
+Repeated </div>
+        
 
     </div>
     </div>

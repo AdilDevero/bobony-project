@@ -181,13 +181,13 @@ footer {
 <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-        <li><a href="home.php">Home</a></li>
-        <li><a href="discord.php">Discord</a></li>
-        <li><a href="team.php">Team</a></li>
-        <li><a href="bans.php">Bans</a></li>
-        <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
-        <li><a href="streamers.php">Streamers</a></li>
-        <li><a href="login.php" style="color: red;">Staff Login</a></li>
+<li><a href="home.php">Home</a></li>
+<li><a href="discord.php">Discord</a></li>
+<li><a href="team.php">Team</a></li>
+<li><a href="bans.php">Bans</a></li>
+<li><a href="annoucement.php">Announcements</a></li>
+<li><a href="REGLEMENTS.php">Reglements</a></li>
+<li><a href="login.php" style="color:red;">Staff Login</a></li>
         <!-- <li><a href="#">Careers</a></li>
         <li><a href="#">Store</a></li>
         <li><a href="#">Forum</a></li>

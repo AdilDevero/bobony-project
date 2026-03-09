@@ -59,6 +59,12 @@ CREATE TABLE IF NOT EXISTS streamers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE announcements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    subject VARCHAR(255) NOT NULL,
+    details TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 -- If you already created the table before this update, run:
 -- ALTER TABLE streamers CHANGE profile image VARCHAR(255) NULL;
 -- (and optionally DROP COLUMN profile if you don't need it)
