@@ -244,6 +244,15 @@ nav ul li a:hover,
             <a href="https://www.instagram.com/vfunky1/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
         </div>
     </div>
+      <div class="card">
+        <img src="https://cdn.discordapp.com/avatars/176828432020275201/cf4970ef523f72353105baade8f32311.png?size=4096">
+        <h3>Pin4tz</h3>
+        <div class="role">Owner</div>
+        <div class="socials">
+            <a href="https://kick.com/pin4tzinhok" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>Kick</a>
+            <a href="https://www.instagram.com/pin4tz/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
+        </div>
+    </div>
 </section>
 
 <!-- Admin RP -->
@@ -369,6 +378,14 @@ nav ul li a:hover,
             <a href="#" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
         </div>
     </div>
+    <div class="card">
+        <img src="https://cdn.discordapp.com/avatars/198878862157807616/a1631685bb3895cfc53e13b1febec0e0.png?size=4096">
+        <h3>Diaye 光</h3>
+        <div class="role">Admin RP</div>
+        <div class="socials">
+            <!-- <a href="#" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
+            <a href="#" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
+        </div>
 </section>
 </section>
 
@@ -397,14 +414,14 @@ nav ul li a:hover,
     </div>
 
     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/1393567405506039900/659b9112d349ff176aae3ed3aba91197.webp?size=1024">
+        <img src="https://cdn.discordapp.com/avatars/1393567405506039900/112568b500c3a47e3ab3d49fce8d1d1e.png?size=4096">
         <h3>evaa.!</h3>
         <div class="role">Helper RP</div>
         <div class="socials">
             </div> 
     </div>
     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/1048613117044731925/4cbde8befe446403cc426b76b6d38abb.webp?size=1024">
+        <img src="https://cdn.discordapp.com/avatars/1048613117044731925/cd4a236110ca511bf9664dadf52b0078.png?size=4096">
         <h3> Alvario🐻 </h3>
         <div class="role">Helper RP</div>
         <div class="socials">
@@ -413,6 +430,13 @@ nav ul li a:hover,
      <div class="card">
         <img src="https://cdn.discordapp.com/avatars/276079396656250882/c78abaa4f737d1c34721162979d2ae74.webp?size=1024">
         <h3> 𝓓𝖗Houssam BOUJM3A³⁰⚕ </h3>
+        <div class="role">Helper RP</div>
+        <div class="socials">
+            </div> 
+    </div>
+     <div class="card">
+        <img src="https://cdn.discordapp.com/avatars/691745894684426316/94302a932a25d955ce3ccbf656c4b824.png?size=4096">
+        <h3> ⁴⁸“𝑪𝒐𝒍𝒐𝒏𝒆𝒍”⁵⁴ </h3>
         <div class="role">Helper RP</div>
         <div class="socials">
             </div> 
