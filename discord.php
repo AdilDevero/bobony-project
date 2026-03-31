@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+
+
+
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -184,6 +191,6 @@
 <footer>
     © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </footer>
-
+<script src="animations.js"></script>
 </body>
 </html>

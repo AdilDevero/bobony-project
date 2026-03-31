@@ -1,41 +1,90 @@
 <?php
 require 'config.php';
+require 'vendor/autoload.php';
+
+// Explicitly require the files to fix your IDE's "Unknown Class" warnings
+require_once 'vendor/phpmailer/phpmailer/src/Exception.php';
+require_once 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 $error = '';
 $success = '';
 
-// remove hardcoded credentials; will validate against database
-
-if (isset($_GET['expired'])) {
-    $error = 'Session expired. Please login again.';
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $conn->real_escape_string($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $email = $conn->real_escape_string($_POST['email'] ?? '');
 
-    // lookup user in staff table
-    $sql = "SELECT id, username, password, role FROM staff WHERE username = '$username' AND status = 'active' LIMIT 1";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        // handle hashed or plain passwords
-        if (password_verify($password, $user['password']) || $password === $user['password']) {
-            // set session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['last_activity'] = time();
-            // update last login
-            $update_sql = "UPDATE staff SET last_login = NOW() WHERE id = " . $user['id'];
-            $conn->query($update_sql);
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            $error = 'Invalid password.';
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Please enter a valid email address.';
+    }
+    else {
+        // Query database to see if email exists
+        $sql = "SELECT id FROM staff WHERE email = '$email' AND status = 'active' LIMIT 1";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $staff_id = $row['id'];
+
+            // Generate a unique token
+            $token = bin2hex(random_bytes(16));
+            $token_hash = hash('sha256', $token);
+
+            // Save hashed token to database
+            // By using DATE_ADD(NOW(), INTERVAL 1 HOUR), we prevent timezone desync 
+            // between PHP and MySQL which often causes "expired link" errors locally.
+            $update_sql = "UPDATE staff SET reset_token_hash = '$token_hash', reset_token_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE id = $staff_id";
+            if ($conn->query($update_sql)) {
+                // Prepare PHPMailer
+                $mail = new PHPMailer(true);
+
+                try {
+                    // IMPORTANT: To actually send emails from localhost/Laragon, 
+                    // you MUST use a real SMTP server. We will set this up for Gmail.
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    // CHANGE THIS TO YOUR GMAIL ADDRESS
+                    $mail->Username = 'your.email.@gmail.com';
+                    // CHANGE THIS TO YOUR GMAIL APP PASSWORD (NOT your normal password)
+                    $mail->Password = 'your-app-password'; // The 16-letter App Password here
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+
+                    // The 'From' address will show up as the sender
+                    $mail->setFrom('your.email.@gmail.com', 'Bobony Family Staff');
+                    $mail->addAddress($email);
+
+                    // Content
+                    $reset_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/reset_password.php?token=$token";
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Password Reset Request - Bobony Family';
+                    $mail->Body = "Hello,<br><br>We received a request to reset your staff password.<br>
+                                      Click the link below to set a new password:<br><br>
+                                      <a href='$reset_link'>$reset_link</a><br><br>
+                                      If you did not request this, please ignore this email.<br>
+                                      This link will expire in 1 hour.";
+                    $mail->AltBody = "Hello,\n\nWe received a request to reset your staff password.\nCopy and paste the link below to set a new password:\n\n$reset_link\n\nIf you did not request this, please ignore this email.";
+
+                    $mail->send();
+                    $success = 'Password reset instructions have been sent to your email.';
+                }
+                catch (Exception $e) {
+                    $error = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
+            else {
+                $error = 'Failed to generate reset token. Please try again.';
+            }
         }
-    } else {
-        $error = 'Username not found or inactive.';
+        else {
+            // For security, it's often better to show the same success message 
+            // even if the email wasn't found.
+            $success = 'If an account with that email exists, a password reset link has been sent.';
+        }
     }
 }
 ?>
@@ -45,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bobony Family - Staff Login</title>
+    <title>Bobony Family - Forgot Password</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
     <style>
@@ -88,46 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             z-index: -1;
         }
 
-        /* NAVBAR */
-        nav {
-            position: fixed;
-            width: 100%;
-            padding: 20px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,0,0,0.3);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 22px;
-            color: red;
-            letter-spacing: 2px;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #ccc;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: red;
-        }
-
-        /* hide login nav items on login page if needed? keep for consistency */
-
-
         .login-container {
             background: #111;
             border: 1px solid rgba(255,0,0,0.3);
@@ -136,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100%;
             max-width: 450px;
             box-shadow: 0 0 40px rgba(255,0,0,0.2);
-            margin-top: 100px;
+            margin-top: 0px;
         }
 
         .login-container h1 {
@@ -207,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 14px;
         }
 
-        .btn-login {
+        .btn-reset {
             width: 100%;
             padding: 12px;
             background: red;
@@ -220,13 +229,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             transition: 0.3s;
         }
 
-        .btn-login:hover {
+        .btn-reset:hover {
             background: #cc0000;
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(255,0,0,0.4);
         }
 
-        .btn-login:active {
+        .btn-reset:active {
             transform: translateY(0);
         }
 
@@ -254,17 +263,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         @media(max-width: 768px) {
-            nav {
-                padding: 15px 30px;
-            }
-
             .login-container {
-                margin: 80px 20px 0;
+                margin: 20px;
                 padding: 35px 25px;
-            }
-
-            .login-container h1 {
-                font-size: 24px;
             }
         }
     </style>
@@ -272,46 +273,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-<!-- <nav>
-    <div class="logo">Bobony Family</div>
-    <ul>
-        <li><a href="home.php">Home</a></li>
-        <li><a href="discord.php">Discord</a></li>
-        <li><a href="team.php">Team</a></li>
-        <li><a href="bans.php">Bans</a></li>
-        <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
-    </ul>
-</nav> -->
-
 <div class="login-container">
-    <h1>Staff Login</h1>
-    <p>Secure access for staff members only</p>
+    <h1>Forgot Password</h1>
+    <p>Enter your email to receive a reset link</p>
 
     <?php if ($error): ?>
         <div class="error-message"><?php echo $error; ?></div>
-    <?php endif; ?>
+    <?php
+endif; ?>
 
     <?php if ($success): ?>
         <div class="success-message"><?php echo $success; ?></div>
-    <?php endif; ?>
+    <?php
+endif; ?>
 
     <form method="POST">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your staff email" required>
         </div>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        </div>
-
-        <button type="submit" class="btn-login" style="margin-bottom: 15px;">Login</button>
-        <a href="forgot_password.php" style="display: block; text-align: center; color: red; text-decoration: none; font-size: 14px; margin-bottom: 20px;">Forgot Password?</a>
+        <button type="submit" class="btn-reset">Send Reset Link</button>
     </form>
 
     <div class="back-link">
-        <a href="home.php">← Back to Home</a>
+        <a href="login.php">← Back to Login</a>
     </div>
 
     <div class="footer-text">
@@ -319,5 +305,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 
+<script src="animations.js"></script>
 </body>
 </html>

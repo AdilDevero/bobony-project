@@ -286,6 +286,6 @@ information from the Bobony Roleplay staff team.
 <div class="footer">
 © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </div>
-
+<script src="animations.js"></script>
 </body>
 </html>

@@ -515,6 +515,6 @@ $blacklisted = array_filter($bans, function($b) { return $b['is_blacklisted']; }
 <div class="footer">
     © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </div>
-
+<script src="animations.js"></script>
 </body>
 </html>

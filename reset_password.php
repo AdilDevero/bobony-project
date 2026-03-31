@@ -3,39 +3,49 @@ require 'config.php';
 
 $error = '';
 $success = '';
+$valid_token = false;
+$staff_id = null;
 
-// remove hardcoded credentials; will validate against database
-
-if (isset($_GET['expired'])) {
-    $error = 'Session expired. Please login again.';
+if (isset($_GET['token'])) {
+    $token = $_GET['token'];
+    $token_hash = hash('sha256', $token);
+    
+    // Check if token is valid and not expired
+    $sql = "SELECT id FROM staff WHERE reset_token_hash = '$token_hash' AND reset_token_expires > NOW() LIMIT 1";
+    $result = $conn->query($sql);
+    
+    if ($result && $result->num_rows > 0) {
+        $valid_token = true;
+        $row = $result->fetch_assoc();
+        $staff_id = $row['id'];
+    } else {
+        $error = 'Invalid or expired password reset link.';
+    }
+} else {
+    $error = 'No reset token provided.';
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $conn->real_escape_string($_POST['username'] ?? '');
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $valid_token) {
     $password = $_POST['password'] ?? '';
-
-    // lookup user in staff table
-    $sql = "SELECT id, username, password, role FROM staff WHERE username = '$username' AND status = 'active' LIMIT 1";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        // handle hashed or plain passwords
-        if (password_verify($password, $user['password']) || $password === $user['password']) {
-            // set session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['last_activity'] = time();
-            // update last login
-            $update_sql = "UPDATE staff SET last_login = NOW() WHERE id = " . $user['id'];
-            $conn->query($update_sql);
-            header("Location: dashboard.php");
-            exit();
-        } else {
-            $error = 'Invalid password.';
-        }
+    $confirm_password = $_POST['confirm_password'] ?? '';
+    
+    if (empty($password) || strlen($password) < 6) {
+        $error = 'Password must be at least 6 characters long.';
+    } elseif ($password !== $confirm_password) {
+        $error = 'Passwords do not match.';
     } else {
-        $error = 'Username not found or inactive.';
+        // Hash password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
+        // Update password and clear token
+        $update_sql = "UPDATE staff SET password = '$hashed_password', reset_token_hash = NULL, reset_token_expires = NULL WHERE id = $staff_id";
+        
+        if ($conn->query($update_sql)) {
+            $success = 'Your password has been reset successfully. You can now login.';
+            $valid_token = false; // Hide form on success
+        } else {
+            $error = 'Failed to reset password. Please try again.';
+        }
     }
 }
 ?>
@@ -45,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bobony Family - Staff Login</title>
+    <title>Bobony Family - Reset staff Password</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
     <style>
@@ -88,46 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             z-index: -1;
         }
 
-        /* NAVBAR */
-        nav {
-            position: fixed;
-            width: 100%;
-            padding: 20px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,0,0,0.3);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 22px;
-            color: red;
-            letter-spacing: 2px;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #ccc;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: red;
-        }
-
-        /* hide login nav items on login page if needed? keep for consistency */
-
-
         .login-container {
             background: #111;
             border: 1px solid rgba(255,0,0,0.3);
@@ -136,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100%;
             max-width: 450px;
             box-shadow: 0 0 40px rgba(255,0,0,0.2);
-            margin-top: 100px;
+            margin-top: 0px;
         }
 
         .login-container h1 {
@@ -183,10 +153,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-shadow: 0 0 15px rgba(255,0,0,0.2);
         }
 
-        .form-group input::placeholder {
-            color: #666;
-        }
-
         .error-message {
             background: rgba(255,0,0,0.1);
             border-left: 3px solid red;
@@ -207,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 14px;
         }
 
-        .btn-login {
+        .btn-reset {
             width: 100%;
             padding: 12px;
             background: red;
@@ -220,21 +186,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             transition: 0.3s;
         }
 
-        .btn-login:hover {
+        .btn-reset:hover {
             background: #cc0000;
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(255,0,0,0.4);
-        }
-
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
-        .footer-text {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 13px;
         }
 
         .back-link {
@@ -252,19 +207,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .back-link a:hover {
             color: white;
         }
-
+        
         @media(max-width: 768px) {
-            nav {
-                padding: 15px 30px;
-            }
-
             .login-container {
-                margin: 80px 20px 0;
+                margin: 20px;
                 padding: 35px 25px;
-            }
-
-            .login-container h1 {
-                font-size: 24px;
             }
         }
     </style>
@@ -272,20 +219,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 
-<!-- <nav>
-    <div class="logo">Bobony Family</div>
-    <ul>
-        <li><a href="home.php">Home</a></li>
-        <li><a href="discord.php">Discord</a></li>
-        <li><a href="team.php">Team</a></li>
-        <li><a href="bans.php">Bans</a></li>
-        <li><a href="REGLEMENTS.php">REGLEMENTS</a></li>
-    </ul>
-</nav> -->
-
 <div class="login-container">
-    <h1>Staff Login</h1>
-    <p>Secure access for staff members only</p>
+    <h1>Reset Password</h1>
+    <p>Set a new password for your staff account</p>
 
     <?php if ($error): ?>
         <div class="error-message"><?php echo $error; ?></div>
@@ -295,29 +231,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="success-message"><?php echo $success; ?></div>
     <?php endif; ?>
 
+    <?php if ($valid_token): ?>
     <form method="POST">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <label for="password">New Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password" required>
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <label for="confirm_password">Confirm New Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm new password" required>
         </div>
 
-        <button type="submit" class="btn-login" style="margin-bottom: 15px;">Login</button>
-        <a href="forgot_password.php" style="display: block; text-align: center; color: red; text-decoration: none; font-size: 14px; margin-bottom: 20px;">Forgot Password?</a>
+        <button type="submit" class="btn-reset">Reset Password</button>
     </form>
+    <?php endif; ?>
 
     <div class="back-link">
-        <a href="home.php">← Back to Home</a>
-    </div>
-
-    <div class="footer-text">
-        Staff login system • Bobony Family 2026
+        <a href="login.php">← Back to Login</a>
     </div>
 </div>
 
+<script src="animations.js"></script>
 </body>
 </html>

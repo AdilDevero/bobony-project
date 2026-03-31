@@ -445,6 +445,6 @@ nav ul li a:hover,
 </section>
     
 </section>
-
+<script src="animations.js"></script>
 </body>
 </html>
