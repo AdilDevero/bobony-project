@@ -47,14 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
                     // CHANGE THIS TO YOUR GMAIL ADDRESS
-                    $mail->Username = 'your.email.@gmail.com';
+                    $mail->Username = 'anasschoukri2004@gmail.com';
                     // CHANGE THIS TO YOUR GMAIL APP PASSWORD (NOT your normal password)
-                    $mail->Password = 'your-app-password'; // The 16-letter App Password here
+                    $mail->Password = 'rcxy deal xqsz ifsn'; // The 16-letter App Password here
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
 
                     // The 'From' address will show up as the sender
-                    $mail->setFrom('your.email.@gmail.com', 'Bobony Family Staff');
+                    $mail->setFrom('bobonyfamily@gmail.com', 'Bobony Family Staff');
                     $mail->addAddress($email);
 
                     // Content

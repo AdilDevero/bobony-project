@@ -1,450 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bobony Family | Team</title>
-<link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pG8g7+5e2kT4CqQD0qfX4+C3JrYwQXBEzV5JDwwl0Chz0sjpIxh0PCIGDxN9VvaPFX3V4xXYGf2sK7yUFNAvXQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body{
-    background:#070707;
-    color:white;
-    overflow-x:hidden;
-}
+    <title>Bobony Family | Team</title>
 
-/* GRID BACKGROUND */
-body::before{
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    background-image:
-        linear-gradient(rgba(255,0,0,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,0,0,0.06) 1px, transparent 1px);
-    background-size:40px 40px;
-    z-index:-2;
-}
-body::after{
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:radial-gradient(circle at 50% 20%, rgba(255,0,0,0.15), transparent 70%);
-    z-index:-1;
-}
+    <link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
 
-/* NAVBAR */
-nav{
-    position:fixed;
-    width:100%;
-    padding:20px 80px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(0,0,0,0.8);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(255,0,0,0.3);
-    z-index:1000;
-}
-.logo{
-    font-weight:800;
-    font-size:22px;
-    color:red;
-    letter-spacing:2px;
-}
-nav ul{
-    display:flex;
-    gap:30px;
-    list-style:none;
-}
-nav ul li a{
-    text-decoration:none;
-    color:#ccc;
-    transition:0.3s;
-}
-nav ul li a:hover,
-.active{
-    color:red;
-}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-/* HEADER SECTION */
-.header{
-    padding:160px 20px 60px;
-    text-align:center;
-}
-.header h1{
-    font-size:45px;
-    font-weight:800;
-}
-.header span{
-    color:red;
-}
-.header p{
-    margin-top:20px;
-    color:#aaa;
-    max-width:700px;
-    margin-left:auto;
-    margin-right:auto;
-}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-/* CATEGORY HEADERS */
-.category-title{
-    padding:40px 80px 20px;
-    font-size:28px;
-    font-weight:700;
-    color:red;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-/* TEAM GRID */
-.team-container{
-    padding:0 80px 100px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    gap:40px;
-}
+        body {
+            background: #070707;
+            color: white;
+            overflow-x: hidden;
+        }
 
-.card{
-    background:#111;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-    border:1px solid rgba(255,0,0,0.2);
-    transition:0.4s;
-    position:relative;
-}
-.card:hover{
-    transform:translateY(-10px);
-    border-color:red;
-    box-shadow:0 0 30px rgba(255,0,0,0.5);
-}
-.card img{
-    width:100px;
-    height:100px;
-    border-radius:20px;
-    margin-bottom:20px;
-}
-.card h3{
-    margin-bottom:5px;
-}
-.role{
-    color:red;
-    font-size:14px;
-    margin-bottom:20px;
-}
+        /* GRID BACKGROUND */
 
-/* SOCIAL BUTTONS */
-.socials{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-}
-.socials a{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    border:1px solid red;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-decoration:none;
-    color:red;
-    transition:0.3s;
-    font-size:14px;
-}
-.socials a:hover{
-    background:red;
-    color:black;
-}
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 0, 0, 0.06)1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06)1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+        }
 
-@media(max-width:900px){
-    nav{
-        padding:20px;
-    }
-    .team-container{
-        padding:40px 20px 100px;
-    }
-}
-</style>
+        body::after {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 20%, rgba(255, 0, 0, 0.15), transparent 70%);
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 20px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 22px;
+            color: red;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ccc;
+            transition: .3s;
+        }
+
+        nav ul li a:hover {
+            color: red
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* HEADER */
+
+        .header {
+            padding: 160px 20px 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 45px;
+            font-weight: 800;
+        }
+
+        .header span {
+            color: red
+        }
+
+        .header p {
+            margin-top: 20px;
+            color: #aaa;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* CATEGORY */
+
+        .category-title {
+            padding: 40px 80px 20px;
+            font-size: 28px;
+            font-weight: 700;
+            color: red;
+        }
+
+        /* TEAM GRID */
+
+        .team-container {
+            padding: 0 80px 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: #111;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: red;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            margin-bottom: 5px;
+        }
+
+        .role {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .socials a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: red;
+            transition: .3s;
+            font-size: 14px;
+        }
+
+        .socials a:hover {
+            background: red;
+            color: black;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:900px) {
+
+            nav {
+                padding: 20px
+            }
+
+            .menu-toggle {
+                display: block
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #0d0d0d;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex
+            }
+
+            .team-container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+        }
+    </style>
 </head>
 
 <body>
 
-<nav>
-    <div class="logo">Bobony Family</div>
-    <ul>
-<li><a href="home.php">Home</a></li>
-<li><a href="discord.php">Discord</a></li>
-<li><a href="team.php">Team</a></li>
-<li><a href="bans.php">Bans</a></li>
-<li><a href="annoucement.php">Announcements</a></li>
-<li><a href="REGLEMENTS.php">Reglements</a></li>
-<li><a href="login.php" style="color:red;">Staff Login</a></li>
-    </ul>
-</nav>
+    <nav>
 
-<section class="header">
-    <h1>The People Behind <span>Bobony Family</span></h1>
-    <p>
-        Meet the talented individuals who make Bobony Family possible.
-        Our team of developers, designers, and community managers work
-        together to create the most immersive roleplay experience.
-    </p>
-</section>
+        <div class="logo">Bobony Family</div>
 
-<!-- Owner & Developer -->
-<div class="category-title">Owner & Developer</div>
-<section class="team-container">
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/236238100228079618/ef63adea8fa353a19ad10f7c21bad994.webp?size=1024">
-        <h3>Cety</h3>
-        <div class="role">Owner & Developer</div>
-        <div class="socials">
-            <a href="https://kick.com/cety01" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/thecety01/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
         </div>
-    </div>
 
-    <div class="card">
-        <img src="https://images-ext-1.discordapp.net/external/5Hd-IxseDSKJPUUvJQTO3ewL3BeM1iT0xNSxZbbBZ8c/https/files.kick.com/images/user/6479354/profile_image/conversion/4c665c92-8d99-46d4-8751-e7968ffc8b73-fullsize.webp?format=webp&width=438&height=438">
-        <h3>Nahoule82</h3>
-        <div class="role">Owner</div>
-        <div class="socials">
-            <a href="https://kick.com/nahoule82k" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/nahoule82/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
+        <ul id="menu">
 
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/284816730147258368/8f6067e00025b00ed149ec7b4f4d9add.webp?size=1024">
-        <h3>vodkafunky1</h3>
-        <div class="role">Owner</div>
-        <div class="socials">
-            <a href="https://kick.com/vodkafunky" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/vfunky1/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-      <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/176828432020275201/cf4970ef523f72353105baade8f32311.png?size=4096">
-        <h3>Pin4tz</h3>
-        <div class="role">Owner</div>
-        <div class="socials">
-            <a href="https://kick.com/pin4tzinhok" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/pin4tz/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-</section>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="discord.php">Discord</a></li>
+            <li><a href="team.php">Team</a></li>
+            <li><a href="bans.php">Bans</a></li>
+            <li><a href="annoucement.php">Announcements</a></li>
+            <li><a href="REGLEMENTS.php">Reglements</a></li>
+            <li><a href="streamers.php">Streamers</a></li>
 
-<!-- Admin RP -->
-<div class="category-title">Admin RP</div>
-<section class="team-container">
-    <!-- Add all Admin RP cards here, same style -->
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/783447910795968512/ed4df167a4f571ae831226156ca415e3.webp?size=1024">
-        <h3>$IMO Ornes</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/simo_ornes" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/simo_ornes/" target="_blank"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/645050047259607061/0e61f9e463f1a345733771b79eaf0d29.webp?size=1024">
-        <h3>Anderson</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <!-- <a href="#" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
-        </div>
-    </div>
+        </ul>
 
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/622427982840987651/db47b7e607d43bbbcaceaf8165b72c76.webp?size=1024">
-        <h3>ONIGIRI</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/onigiri78" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/onigiri_78/" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
+    </nav>
+
+    <section class="header">
+
+        <h1>The People Behind <span>Bobony Family</span></h1>
+
+        <p>
+            Meet the talented individuals who make Bobony Family possible.
+            Our team works together to create the best roleplay experience.
+        </p>
+
+    </section>
+
+    <!-- OWNER -->
+
+    <div class="category-title">Owner & Developer</div>
+
+    <section class="team-container">
+
         <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/912100387287339008/30e4f68bca9ae571f8e342a0616f19b1.webp?size=1024">
-        <h3>24 MOUSSAOUI</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/moussaoui" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/24_moussaoui//" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
+            <img
+                src="https://cdn.discordapp.com/avatars/236238100228079618/ef63adea8fa353a19ad10f7c21bad994.webp?size=1024">
+            <h3>Cety</h3>
+            <div class="role">Owner & Developer</div>
+            <div class="socials">
+                <a href="https://kick.com/cety01"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/thecety01/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
         </div>
-    </div>
+
         <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/888554205697155093/0c03dfde56567d9af3102bae00c9c24f.webp?size=1024">
-        <h3>GOᗩTEᗪᑎOOᗷIE</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://www.kick.com/goatednoobie" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/goatednoobie" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
+            <img
+                src="https://images-ext-1.discordapp.net/external/5Hd-IxseDSKJPUUvJQTO3ewL3BeM1iT0xNSxZbbBZ8c/https/files.kick.com/images/user/6479354/profile_image/conversion/4c665c92-8d99-46d4-8751-e7968ffc8b73-fullsize.webp">
+            <h3>Nahoule82</h3>
+            <div class="role">Owner</div>
+            <div class="socials">
+                <a href="https://kick.com/nahoule82k"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/nahoule82/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
         </div>
-    </div>
-    
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/1199778409002315806/5af3d0626cda2605d686281c8f65cb49.webp?size=1024">
-        <h3>LHINDI</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/lhindi95" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/boughaleb_95/" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/871885765423022151/79c004ed55befb7ebef4bbdc8b24e086.webp?size=1024">
-        <h3>RobbaN 𖤐</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/robbangg" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/RobbaNgg" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/459823373682212874/c9d06a34c271717ebb346397323b03ab.webp?size=1024">
-        <h3>Reviz</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/reviztv" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://instagram.com/reviztv" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/713130947721166848/8759131f118262404a4aac49f7d8e682.webp?size=1024">
-        <h3>IHAB 🅳🆂</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <a href="https://kick.com/dsihab" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="https://www.instagram.com/ds_ihab" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a>
-        </div>
-    </div>
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/292327894426976256/e5d48c57bbe4e00bc2e2d3f2dfd9a6f2.webp?size=1024">
-        <h3>Detect</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <!-- <a href="#" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
-        </div>
-    </div>
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/423561903986442250/39a37f1c38b0e537408d6e5285b67ffc.webp?size=1024">
-        <h3>Lotfi</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <!-- <a href="x" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="x" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
-        </div>
-    </div>
-     <div class="card">
-        <img src="https://cdn.discordapp.com/guilds/1167631174588448790/users/528040466231459850/avatars/2948a9a5d82c54cc7df4dcb28e46e46f.webp?size=1024">
-        <h3>𝐂𝟎𝐑𝐕𝟏𝐍🐲</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <!-- <a href="#" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
-        </div>
-    </div>
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/376748459891359754/a837c1d42c8ffc9b3b51983ff05ad202.webp?size=1024">
-        <h3>DAX</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <!-- <a href="#" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/198878862157807616/a1631685bb3895cfc53e13b1febec0e0.png?size=4096">
-        <h3>Diaye 光</h3>
-        <div class="role">Admin RP</div>
-        <div class="socials">
-            <!-- <a href="#" target="_blank"><i class="fa-brands fa-kickstarter" aria-hidden="true"></i><span class="sr-only">Kick</span>Kick</a>
-            <a href="#" target="_blank"><i class="fa-brands fa-IG" aria-hidden="true"></i><span class="sr-only">IG</span>IG</a> -->
-        </div>
-</section>
-</section>
 
-<!-- Helper RP -->
-<div class="category-title">Helper RP</div>
-<section class="team-container">
-
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/704621230581481502/cbd8133dc00a681730c30809423282e0.webp?size=1024">
-        <h3>𝕄ℍ𝔸ℕ𝔻</h3>
-        <div class="role">Helper RP</div>
-        <div class="socials">
-            <a href="https://kick.com/mhandq2" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>kick</a>
-            <a href="https://www.instagram.com/q2__ilias/" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/284816730147258368/8f6067e00025b00ed149ec7b4f4d9add.webp?size=1024">
+            <h3>vodkafunky1</h3>
+            <div class="role">Owner</div>
+            <div class="socials">
+                <a href="https://kick.com/vodkafunky"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/vfunky1/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
         </div>
-    </div>
 
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/785802523364556801/22d73726421f26d96656c2a8d8114f2a.webp?size=1024">
-        <h3>!Sₑₙᵢₒᵣ 𝓞𝓜𝓔𝓖𝓐 ❓</h3>
-        <div class="role">Helper RP</div>
-        <div class="socials">
-            <a href="https://kick.com/omegagaming77" target="_blank"><i class="fa-brands fa-kickstarter"></i><span class="sr-only">Kick</span>kick</a>
-            <a href="https://www.instagram.com/omegagaming77" target="_blank"><i class="fa-brands fa-instagram"></i><span class="sr-only">IG</span>IG</a>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/176828432020275201/cf4970ef523f72353105baade8f32311.png?size=4096">
+            <h3>Pin4tz</h3>
+            <div class="role">Owner</div>
+            <div class="socials">
+                <a href="https://kick.com/pin4tzinhok"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/pin4tz/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
         </div>
-    </div>
 
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/1393567405506039900/112568b500c3a47e3ab3d49fce8d1d1e.png?size=4096">
-        <h3>evaa.!</h3>
-        <div class="role">Helper RP</div>
-        <div class="socials">
-            </div> 
-    </div>
-    <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/1048613117044731925/cd4a236110ca511bf9664dadf52b0078.png?size=4096">
-        <h3> Alvario🐻 </h3>
-        <div class="role">Helper RP</div>
-        <div class="socials">
-            </div> 
-    </div>
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/276079396656250882/c78abaa4f737d1c34721162979d2ae74.webp?size=1024">
-        <h3> 𝓓𝖗Houssam BOUJM3A³⁰⚕ </h3>
-        <div class="role">Helper RP</div>
-        <div class="socials">
-            </div> 
-    </div>
-     <div class="card">
-        <img src="https://cdn.discordapp.com/avatars/691745894684426316/94302a932a25d955ce3ccbf656c4b824.png?size=4096">
-        <h3> ⁴⁸“𝑪𝒐𝒍𝒐𝒏𝒆𝒍”⁵⁴ </h3>
-        <div class="role">Helper RP</div>
-        <div class="socials">
-            </div> 
-    </div>
+    </section>
 
-</section>
-    
-</section>
-<script src="animations.js"></script>
+    <!-- ADMIN RP -->
+
+    <div class="category-title">Admin RP</div>
+
+    <section class="team-container">
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/783447910795968512/ed4df167a4f571ae831226156ca415e3.webp?size=1024">
+            <h3>$IMO Ornes</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/simo_ornes"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/simo_ornes/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="card">
+            <img
+                src="https://images-ext-1.discordapp.net/external/MlZAHwCA2eVeoMQH2uejsJ6tQzXltsppudlmhyNF1ic/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1199778409002315806/f6c6a1ddac6c8f4c64b94404bbd93678.webp?format=webp&width=320&height=320">
+            <h3>Lhindi</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/lhindi95"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/boughaleb_95/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/622427982840987651/db47b7e607d43bbbcaceaf8165b72c76.webp?size=1024">
+            <h3>ONIGIRI</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/onigiri78"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/onigiri_78/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/912100387287339008/30e4f68bca9ae571f8e342a0616f19b1.webp?size=1024">
+            <h3>24 MOUSSAOUI</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/moussaoui"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/24_moussaoui/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://images-ext-1.discordapp.net/external/tgVSBgIeRrn7hdyRUpvTBqhSghr-HcUbob2zD6CLsFs/%3Fsize%3D1024%26animated%3Dtrue/https/cdn.discordapp.com/avatars/888554205697155093/a_59125327a91ec0fa36da509d88db0153.gif?width=225&height=225">
+            <h3>GOATEDNOOBIE</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://www.kick.com/goatednoobie"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/goatednoobie"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/871885765423022151/79c004ed55befb7ebef4bbdc8b24e086.webp?size=1024">
+            <h3>RobbaN 𖤐</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/robbangg"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/RobbaNgg"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/459823373682212874/c9d06a34c271717ebb346397323b03ab.webp?size=1024">
+            <h3>Reviz</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/reviztv"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://instagram.com/reviztv"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/713130947721166848/8759131f118262404a4aac49f7d8e682.webp?size=1024">
+            <h3>IHAB 🅳🆂</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/dsihab"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/ds_ihab"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/620569100342657037/aa67e53e81229f0277171ce29d22e760.png?size=4096">
+            <h3>ZAWA9 🌪</h3>
+            <div class="role">Admin RP</div>
+            <div class="socials">
+                <a href="https://kick.com/z4wa9"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/faroukbtlb"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/645050047259607061/0e61f9e463f1a345733771b79eaf0d29.webp?size=1024">
+            <h3>Anderson</h3>
+            <div class="role">Admin RP</div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/423561903986442250/39a37f1c38b0e537408d6e5285b67ffc.webp?size=1024">
+            <h3>Lotfi</h3>
+            <div class="role">Admin RP</div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/292327894426976256/e5d48c57bbe4e00bc2e2d3f2dfd9a6f2.webp?size=1024">
+            <h3>Detect</h3>
+            <div class="role">Admin RP</div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/guilds/1167631174588448790/users/528040466231459850/avatars/2948a9a5d82c54cc7df4dcb28e46e46f.webp?size=1024">
+            <h3>𝐂𝟎𝐑𝐕𝟏𝐍🐲</h3>
+            <div class="role">Admin RP</div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://images-ext-1.discordapp.net/external/XeT0Rqr5RQ8W1_VT6oPo6pQBWkvH3pz1ujy0la5laIM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/376748459891359754/e5b4adc89668c4474a249ddba8670fe3.webp?format=webp&width=810&height=810">
+            <h3>DAX</h3>
+            <div class="role">Admin RP</div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/274829332235419649/65d11b83ba2499d20d9a6595e99ba541.png?size=4096">
+            <h3>! ᴘsʏᴄʜᴏsᴋᴜʟʟs 👽</h3>
+            <div class="role">Admin RP</div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/198878862157807616/a1631685bb3895cfc53e13b1febec0e0.png?size=4096">
+            <h3>Diaye 光</h3>
+            <div class="role">Admin RP</div>
+        </div>
+    </section>
+
+    <!-- HELPER RP -->
+
+    <div class="category-title">Helper RP</div>
+
+    <section class="team-container">
+
+        <div class="card">
+            <img
+                src="https://images-ext-1.discordapp.net/external/I7rRJoL_DoZT1YeUCbnjruMDRiSeAc3GpAC6IjJVjgE/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/704621230581481502/1247be17484006ef6dca29f6812b61d7.webp?format=webp&width=810&height=810">
+            <h3>MHAND</h3>
+            <div class="role">Helper RP</div>
+            <div class="socials">
+                <a href="https://kick.com/mhandq2"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/q2__ilias/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/785802523364556801/22d73726421f26d96656c2a8d8114f2a.webp?size=1024">
+            <h3>OMEGA</h3>
+            <div class="role">Helper RP</div>
+            <div class="socials">
+                <a href="https://kick.com/omegagaming77"><i class="fa-brands fa-kickstarter"></i></a>
+                <a href="https://www.instagram.com/omegagaming77"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img
+                src="https://images-ext-1.discordapp.net/external/5R0Bimv7hN_F_dikr8TE_YV0_jGBZ60I7pNDFegUSaw/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1393567405506039900/aaa85028ec8bb3e11fcac6d34118be3e.webp?format=webp&width=320&height=320">
+            <h3>evaa</h3>
+            <div class="role">Helper RP</div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/1048613117044731925/cd4a236110ca511bf9664dadf52b0078.png?size=4096">
+            <h3>Alvario🐻</h3>
+            <div class="role">Helper RP</div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/276079396656250882/c78abaa4f737d1c34721162979d2ae74.webp?size=1024">
+            <h3>𝓓𝖗Houssam BOUJM3A³⁰⚕ </h3>
+            <div class="role">Helper RP</div>
+        </div>
+        <div class="card">
+            <img
+                src="https://cdn.discordapp.com/avatars/691745894684426316/94302a932a25d955ce3ccbf656c4b824.png?size=4096">
+            <h3>⁴⁸“𝑪𝒐𝒍𝒐𝒏𝒆𝒍”⁵⁴ </h3>
+            <div class="role">Helper RP</div>
+        </div>
+    </section>
+
+    <script>
+
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("active");
+        }
+
+    </script>
+    <script src="animations.js"></script>
 </body>
+
 </html>
