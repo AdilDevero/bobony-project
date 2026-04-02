@@ -275,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!-- <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-        <li><a href="home.php">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="discord.php">Discord</a></li>
         <li><a href="team.php">Team</a></li>
         <li><a href="bans.php">Bans</a></li>
@@ -311,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <div class="back-link">
-        <a href="home.php">← Back to Home</a>
+        <a href="index.php">← Back to Home</a>
     </div>
 
     <div class="footer-text">

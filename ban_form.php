@@ -462,7 +462,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <a href="ban_management.php" class="btn btn-cancel">
                 <i class="fas fa-times"></i> Cancel
             <!-- <ul>
-                <li><a href="home.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="discord.php">Discord</a></li>
                 <li><a href="team.php">Team</a></li>
                 <li><a href="bans.php">Bans</a></li>

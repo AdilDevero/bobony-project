@@ -290,7 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="logo">Bobony Family</div>
     </div>
     <ul>
-        <li><a href="home.php">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
         <li><a href="ban_management.php">Bans</a></li>
     </ul>

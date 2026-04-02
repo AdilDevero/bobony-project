@@ -378,7 +378,7 @@ $blacklisted = count(array_filter($bans, function($b) { return $b['is_blackliste
 <!-- <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-        <li><a href="home.php">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="discord.php">Discord</a></li>
         <li><a href="team.php">Team</a></li>
         <li><a href="bans.php">Bans</a></li>
