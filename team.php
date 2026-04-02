@@ -510,13 +510,13 @@
         </div>
         <div class="card">
             <img
-                src="https://cdn.discordapp.com/avatars/1048613117044731925/cd4a236110ca511bf9664dadf52b0078.png?size=4096">
+                src="https://cdn.discordapp.com/avatars/1048613117044731925/43cf2325357ce95ea034785a2e019700.webp?size=1024">
             <h3>Alvario🐻</h3>
             <div class="role">Helper RP</div>
         </div>
         <div class="card">
             <img
-                src="https://cdn.discordapp.com/avatars/276079396656250882/c78abaa4f737d1c34721162979d2ae74.webp?size=1024">
+                src="https://images-ext-1.discordapp.net/external/1SAPKE1NpgpLLL1DxVBhrBI3YROjY2F2TOLHBe1uu6s/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/276079396656250882/aaf8d42650f3855abaae29675c95dfe0.webp?format=webp&width=320&height=320">
             <h3>𝓓𝖗Houssam BOUJM3A³⁰⚕ </h3>
             <div class="role">Helper RP</div>
         </div>
@@ -535,7 +535,6 @@
         }
 
     </script>
-    <script src="animations.js"></script>
 </body>
 
 </html>

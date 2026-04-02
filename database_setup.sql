@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS staff (
 
 -- Insert staff login account (plain text password used: admin123)
 INSERT INTO staff (username, password, role, status, email) VALUES 
-('admin', 'admin123', 'admin', 'active', 'admin@bobony.com');
+('admin', 'admin123', 'owner', 'active', 'admin@bobony.com');
 
 -- Create Activity Log Table (optional)
 CREATE TABLE IF NOT EXISTS activity_log (
@@ -28,6 +28,17 @@ CREATE TABLE IF NOT EXISTS activity_log (
     action VARCHAR(255) NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Create Logs Table
+CREATE TABLE IF NOT EXISTS logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    action VARCHAR(255) NOT NULL,
+    details TEXT NOT NULL,
+    user_id INT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('success', 'failed', 'warning') NOT NULL DEFAULT 'success',
+    FOREIGN KEY (user_id) REFERENCES staff(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Create Bans Table

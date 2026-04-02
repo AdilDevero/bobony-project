@@ -25,6 +25,54 @@ $admin_count = $conn->query("SELECT COUNT(*) as count FROM staff WHERE role = 'a
 // Get recent logins
 $recent_logins = $conn->query("SELECT username, last_login FROM staff WHERE last_login IS NOT NULL AND status = 'active' ORDER BY last_login DESC LIMIT 5");
 
+// Add logging functionality
+function logAction($action, $details, $userId, $conn, $status = 'success') {
+    $stmt = $conn->prepare("INSERT INTO logs (action, details, user_id, status, timestamp) VALUES (?, ?, ?, ?, NOW())");
+    $stmt->bind_param("ssis", $action, $details, $userId, $status);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Example usage of logging
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['create_user'])) {
+        // Debugging statement
+        error_log('Create user action triggered');
+        // Log create user action
+        logAction('create_user', 'Created a new user', $user_id, $conn, 'success');
+    } elseif (isset($_POST['delete_user'])) {
+        // Debugging statement
+        error_log('Delete user action triggered');
+        // Log delete user action
+        logAction('delete_user', 'Deleted a user', $user_id, $conn, 'success');
+    } elseif (isset($_POST['create_streamer'])) {
+        // Debugging statement
+        error_log('Create streamer action triggered');
+        // Log create streamer action
+        logAction('create_streamer', 'Created a new streamer', $user_id, $conn, 'success');
+    } elseif (isset($_POST['delete_streamer'])) {
+        // Debugging statement
+        error_log('Delete streamer action triggered');
+        // Log delete streamer action
+        logAction('delete_streamer', 'Deleted a streamer', $user_id, $conn, 'success');
+    } elseif (isset($_POST['add_announcement'])) {
+        // Debugging statement
+        error_log('Add announcement action triggered');
+        // Log add announcement action
+        logAction('add_announcement', 'Added a new announcement', $user_id, $conn, 'success');
+    } elseif (isset($_POST['ban_user'])) {
+        // Debugging statement
+        error_log('Ban user action triggered');
+        // Log ban user action
+        logAction('ban_user', 'Banned a user', $user_id, $conn, 'success');
+    }
+}
+
+// Log last login and logout
+logAction('last_login', 'User logged in', $user_id, $conn);
+// Add this to logout.php
+// logAction('last_logout', 'User logged out', $user_id, $conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -403,15 +451,18 @@ $recent_logins = $conn->query("SELECT username, last_login FROM staff WHERE last
 
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
-    <div class="slogo">Bobony Family</div>
-    <div class="greet">Hello, <?php echo htmlspecialchars($username); ?></div>
+    <br>
+    <br>
+    <br> 
     <a href="ban_management.php" class="side-btn primary"><i class="fas fa-ban"></i><span>Ban Management</span></a>
     <a href="streamers_panel.php" class="side-btn"><i class="fas fa-video"></i><span>Manage Streamers</span></a>
     <a href="announcement_panel.php" class="side-btn"><i class="fas fa-bullhorn"></i><span>Manage Announcements</span></a>
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner'): ?>
+        <a href="users_manager.php" class="side-btn"><i class="fas fa-users"></i><span>Users Manager</span></a>
         <a href="create_user.php" class="side-btn"><i class="fas fa-user-plus"></i><span>Create User</span></a>
     <?php endif; ?>
     <div style="flex:1"></div>
+    
     <a href="dashboard.php" class="side-btn"><i class="fas fa-home"></i><span>Dashboard</span></a>
 </aside>
 
