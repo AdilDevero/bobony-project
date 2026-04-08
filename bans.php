@@ -371,6 +371,7 @@ $blacklisted = array_filter($bans, function($b) { return $b['is_blacklisted']; }
 <li><a href="bans.php">Bans</a></li>
 <li><a href="annoucement.php">Announcements</a></li>
 <li><a href="REGLEMENTS.php">Reglements</a></li>
+<li><a href="streamers.php">Streamers</a></li>
 <li><a href="login.php" style="color:red;">Staff Login</a></li>
         <!-- <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner'): ?>
             <li><a href="create_user.php" style="color: red;">Create User</a></li>

@@ -255,6 +255,7 @@
             <li><a href="annoucement.php">Announcements</a></li>
             <li><a href="REGLEMENTS.php">Reglements</a></li>
             <li><a href="streamers.php">Streamers</a></li>
+            <li><a href="login.php" style="color:red;">Staff Login</a></li>
             
         </ul>
 

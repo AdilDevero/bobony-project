@@ -166,6 +166,27 @@ nav ul li a:hover,
     nav{padding:20px;}
     .team-container{padding:40px 20px 100px;}
 }
+
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:80px;
+    color:#777;
+}
+
+.empty i{
+    font-size:50px;
+    margin-bottom:20px;
+    color:#444;
+}
+
+.footer{
+    text-align:center;
+    padding:40px 20px;
+    color:#666;
+    border-top:1px solid rgba(255,0,0,0.2);
+    margin-top:80px;
+}
 </style>
 </head>
 
@@ -180,6 +201,7 @@ nav ul li a:hover,
 <li><a href="bans.php">Bans</a></li>
 <li><a href="annoucement.php">Announcements</a></li>
 <li><a href="REGLEMENTS.php">Reglements</a></li>
+<li><a href="streamers.php">Streamers</a></li>
 <li><a href="login.php" style="color:red;">Staff Login</a></li>
     </ul>
 </nav>
@@ -216,9 +238,17 @@ nav ul li a:hover,
         </div>
     <?php endwhile; ?>
 <?php else: ?>
-    <p style="text-align:center; grid-column:1/-1;">No streamers added yet.</p>
+    <div class="empty">
+        <i class="fas fa-inbox"></i>
+        <h3>No streamers yet</h3>
+        <p>Our streamers list will appear here.</p>
+    </div>
 <?php endif; ?>
 </section>
 
+<div class="footer">
+© 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
+</div>
+<script src="animations.js"></script>
 </body>
 </html>
