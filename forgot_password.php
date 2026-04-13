@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // CHANGE THIS TO YOUR GMAIL ADDRESS
                     $mail->Username = 'anasschoukri2004@gmail.com';
                     // CHANGE THIS TO YOUR GMAIL APP PASSWORD (NOT your normal password)
-                    $mail->Password = 'crf-fdwer-sffewa'; // The 16-letter App Password here
+                    $mail->Password = 'rcxy deal xqsz ifsn'; // The 16-letter App Password here
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
 
