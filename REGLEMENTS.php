@@ -1,3 +1,32 @@
+<?php
+require 'config.php';
+
+$categories = [
+    'General Rules',
+    'Illegal Rules',
+    'Streamer Rules',
+    'Heist / Braquages Rules',
+    'Blacklisted Words'
+];
+
+$rules_by_category = [];
+foreach($categories as $cat) {
+    $rules_by_category[$cat] = [];
+}
+
+$sql = "SELECT * FROM reglements ORDER BY id ASC";
+$result = $conn->query($sql);
+if ($result && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $cat = $row['category'];
+        if (!isset($rules_by_category[$cat])) {
+            $rules_by_category[$cat] = [];
+            $categories[] = $cat; // In case there are new categories dynamically added
+        }
+        $rules_by_category[$cat][] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +35,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="img/bbnylogo.png" href="img/bbnylogo.png">
 
-
     <!-- Google Font -->
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -24,7 +52,6 @@
         }
 
         /* NAVBAR */
-
         nav{
             position:fixed;
             width:100%;
@@ -84,11 +111,21 @@
             border-radius: 10px;
             border-left: 4px solid #ff0000;
             transition: 0.3s;
+            line-height: 1.6;
         }
 
         .rule-box:hover {
             transform: translateY(-3px);
             background: #252525;
+        }
+        
+        .rule-box ul {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        
+        .rule-box li {
+            margin-bottom: 5px;
         }
 
         footer {
@@ -115,158 +152,60 @@
 <nav>
     <div class="logo">Bobony Family</div>
     <ul>
-<li><a href="index.php">Home</a></li>
-<li><a href="discord.php">Discord</a></li>
-<li><a href="team.php">Team</a></li>
-<li><a href="bans.php">Bans</a></li>
-<li><a href="annoucement.php">Announcements</a></li>
-<li><a href="REGLEMENTS.php">Reglements</a></li>
-<li><a href="streamers.php">Streamers</a></li>
-<li><a href="login.php" style="color:red;">Staff Login</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="discord.php">Discord</a></li>
+        <li><a href="team.php">Team</a></li>
+        <li><a href="bans.php">Bans</a></li>
+        <li><a href="annoucement.php">Announcements</a></li>
+        <li><a href="REGLEMENTS.php">Reglements</a></li>
+        <li><a href="streamers.php">Streamers</a></li>
+        <li><a href="login.php" style="color:red;">Staff Login</a></li>
     </ul>
 </nav>
 
 <div class="container">
 
-    <!-- GENERAL RULES -->
+    <?php foreach($categories as $cat): ?>
+    <?php if(!empty($rules_by_category[$cat])): ?>
     <div class="section">
-        <h2>General Rules</h2>
+        <h2><?php echo $cat === 'Blacklisted Words' ? '🚫 ' : ''; ?><?php echo htmlspecialchars($cat); ?></h2>
 
-        <div class="rule-box">• TOXIC RP: Any toxic behavior affecting the player behind the character (especially TREBRIB) → 2 to 4 Days Ban.</div>
-        <div class="rule-box">• GIRLS RP: Disrespecting female players → PERMA BAN.</div>
-        <div class="rule-box">• Need Admin? Use /report or open a ticket with full clip (voice required).</div>
-        <div class="rule-box">• Report after 1 week = Cancelled.</div>
-        <div class="rule-box">• Fight Cooldown 30min – No Respect CD → 2 Days.</div>
-        <div class="rule-box">• Metagaming (Using Discord/Stream info in RP) → 2 Days Min.</div>
-        <div class="rule-box">• Powergaming allowed (Semi-Strict RP).</div>
-        <div class="rule-box">• Carkill intentional → 4 Days Min.</div>
-        <div class="rule-box">• Freekill → 2 to 4 Days.</div>
-        <div class="rule-box">• NVL (No Value of Life) → 4 Days Min.</div>
-        <div class="rule-box">• /Me misuse → 2 Days.</div>
-        <div class="rule-box">• Salary Abuse → 7 Days.</div>
-        <div class="rule-box">• Acting as Admin in RP → 2 Days Min.</div>
-        <div class="rule-box">• ALT to ALT Transfer → PERMA BAN.</div>
-        <div class="rule-box">• Out of Character abuse → 2 Days Min.</div>
-        <div class="rule-box">• Win RP → 2 Days.</div>
-        <div class="rule-box">• Refuse RP with Police/Medic → 2 Days.</div>
-        <div class="rule-box">• Mass RP limit → 48h Ban.</div>
-        <div class="rule-box">• Cohérence RP violation → Whitelist Revoked.</div>
-        <div class="rule-box">• ALT+F4 during scene → 7 Days.</div>
-        <div class="rule-box">• 2 Jobs → 7 Days.</div>
-        <div class="rule-box">• Cancel Animation abuse → 7 Days.</div>
-        <div class="rule-box">• Destructive Speech (racism, politics, discrimination) → 2 Weeks to PERMA.</div>
-    </div>
-
-    <!-- ILLEGAL RULES -->
-    <div class="section">
-        <h2>Illegal Rules</h2>
-
-        <div class="rule-box">• Mort RP → Must submit Mort RP file.</div>
-        <div class="rule-box">• Street Fight: No cooldown in own street, attackers max 20min.</div>
-        <div class="rule-box">• Rob Police forbidden (except escaping situation) → 2 Days.</div>
-        <div class="rule-box">• Hostage only for robbery (No police kidnapping to free friends) → 48h Ban.</div>
-        <div class="rule-box">• Escorting dead players forbidden → 2 Days.</div>
-        <div class="rule-box">• No Memory Voice – Cannot recognize someone only by voice.</div>
+        <?php foreach($rules_by_category[$cat] as $rule): ?>
+            <div class="rule-box">
+                <?php 
+                $rule_text = htmlspecialchars($rule['rule_text']);
+                if (strpos($rule_text, "\n") !== false) {
+                    $lines = explode("\n", $rule_text);
+                    echo "<strong>" . trim($lines[0]) . "</strong>";
+                    if (count($lines) > 1) {
+                        echo "<ul>";
+                        for($i=1; $i<count($lines); $i++){
+                            $l = trim($lines[$i]);
+                            if (!empty($l)) {
+                                if(str_starts_with($l, '- ')) {
+                                    $l = substr($l, 2);
+                                }
+                                echo "<li>" . $l . "</li>";
+                            }
+                        }
+                        echo "</ul>";
+                    }
+                } else {
+                    echo "• " . $rule_text;
+                }
+                ?>
+                
+                <?php if (!empty($rule['ban_time'])): ?>
+                    &nbsp;→&nbsp;<span style="color: #ff4757; font-weight: 600;"><?php echo htmlspecialchars($rule['ban_time']); ?></span>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
 
     </div>
+    <?php endif; ?>
+    <?php endforeach; ?>
 
-    <!-- STREAMER RULES -->
-    <div class="section">
-        <h2>Streamer Rules</h2>
-
-        <div class="rule-box">• Maintain Positive Image – No negative speech about Bobony RP.</div>
-        <div class="rule-box">• Must follow all server rules while streaming.</div>
-        <div class="rule-box">• OOC Insults strictly forbidden (no real-life insults, slurs, mocking).</div>
-        <div class="rule-box">• Saying “it’s jokes” or “stream content” is NOT an excuse.</div>
-        <div class="rule-box">• Violations → 48h Ban to PERMA.</div>
-
-    </div>
-
-    <!-- HEIST / BRAQUAGES RULES -->
-    <div class="section">
-        <h2>Heist Rules</h2>
-
-        <div class="rule-box">
-            <strong>Shop Robbery</strong>
-            <ul>
-                <li>Criminals: Minimum: 1 vehicle + 2 criminals. Maximum: 1 vehicle + 4 criminals.</li>
-                <li>Once the police pursuit begins, you cannot stop to use repair kits or refuel. You are fully responsible for your vehicle and decisions.</li>
-                <li>At least one criminal must always stay with the hostage. If the hostage is left alone, police are allowed to intervene, and arrest everyone involved.</li>
-                <li>Getting arrested more than once in the same day will increase your fine: 2nd arrest: x2 fine; 3rd arrest: x3 fine (and so on).</li>
-                <li>You must have a weapon (Melee or Pistol) and a real hostage to initiate the robbery.</li>
-                <li>Escape using motorcycles is strictly prohibited (cars only).</li>
-            </ul>
-        </div>
-
-        <div class="rule-box">
-            <strong>Laundromat Heist</strong>
-            <ul>
-                <li>Criminals: Minimum: 1 vehicle + 2 criminals + 1 hostage. Maximum: 1 vehicle + 4 criminals + 2 hostages.</li>
-                <li>Police: Minimum: 2 vehicles + 4 officers. Maximum: 4 vehicles + 8 officers.</li>
-            </ul>
-        </div>
-
-        <div class="rule-box">
-            <strong>Cash Exchange Heist</strong>
-            <ul>
-                <li>Criminals: Minimum: 1 vehicle + 2 criminals + 1 hostage. Maximum: 1 vehicle + 4 criminals + 2 hostages.</li>
-                <li>Police: Minimum: 2 vehicles + 4 officers. Maximum: 4 vehicles + 8 officers.</li>
-            </ul>
-        </div>
-
-        <div class="rule-box">
-            <strong>Fleeca Robbery (Cooldown 1 week)</strong>
-            <ul>
-                <li>Criminals: Minimum: 1 vehicle + 2 criminals + 2 hostages + 2 pistols. Maximum: 1 vehicle + 4 criminals + 4 hostages.</li>
-                <li>Police: Minimum: 3 vehicles + 6 officers. Maximum: 4 vehicles + 8 officers.</li>
-            </ul>
-        </div>
-
-        <div class="rule-box">
-            <strong>Pacific Robbery (Cooldown 1 week)</strong>
-            <ul>
-                <li>Criminals: Minimum: 2 vehicles + 8 criminals + 3 hostages (all armed). Maximum: 3 vehicles + 10 criminals + 6 hostages (all armed).</li>
-                <li>Police: Minimum: 6 vehicles + 12 officers + 2 helicopters (4 officers). Maximum: 9 vehicles + 18 officers + 2 helicopters (4 officers).</li>
-            </ul>
-        </div>
-
-        <div class="rule-box">
-            <strong>FIB Heist</strong>
-            <ul>
-                <li>Criminals: Minimum: 1 vehicle + 4 criminals + 2 hostages + 2 pistols. Maximum: 2 vehicles + 6 criminals + 4 hostages.</li>
-                <li>Police: Minimum: 4 vehicles + 7 officers + 1 helicopter. Maximum: 6 vehicles + 12 officers + 1 helicopter.</li>
-            </ul>
-        </div>
-
-        <div class="rule-box">
-             <strong>LANCEMENT BRAQUAGE</strong> 
-        </div>
-
-        <div class="rule-box">
-            ALL GANGS: LI KAYLO7O LES BRAQUAGES F DISCORD O KAYKON 3ANDHOM L OK ANAHO APPROUVE, 3ANDKOM MAXIMUM 30MIN BACH TLANCER BRAQUAGE DIALAK SINN POLICE GHADI ANNULIWH ! HADO LES BRAQUAGES CONCERNED: Art Heist, Jewellery Heist, Fleeca Robbery, Paleto Robbery, Pacific Robbery
-        </div>
-
-    </div>
-     <!-- STREAMER RULES -->
-    <div class="section">
-        <h2>🚫 Blacklisted Words</h2>
-
-        <div class="rule-box">•The following words are strictly forbidden (IG & OOC):.</div>
-        <div class="rule-box">• Cringe.</div>
-        <div class="rule-box">• l7ass.</div>
-        <div class="rule-box">• 3ebad.</div>
-        <div class="rule-box">• l9bar.</div>
-        <div class="rule-box">• klawa.</div>
-        <div class="rule-box">• Punishment:</div>
-        <div class="rule-box">• 1st — Warning
-2nd — Ban 48h
-Repeated </div>
-        
-
-    </div>
-    </div>
 </div>
- 
 
 <footer>
     © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass

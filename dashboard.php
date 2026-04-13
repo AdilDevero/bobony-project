@@ -457,6 +457,7 @@ logAction('last_login', 'User logged in', $user_id, $conn);
     <a href="ban_management.php" class="side-btn primary"><i class="fas fa-ban"></i><span>Ban Management</span></a>
     <a href="streamers_panel.php" class="side-btn"><i class="fas fa-video"></i><span>Manage Streamers</span></a>
     <a href="announcement_panel.php" class="side-btn"><i class="fas fa-bullhorn"></i><span>Manage Announcements</span></a>
+            <a href="reglement_panel.php" class="side-btn"><i class="fas fa-gavel"></i><span>Reglement</span></a>
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner'): ?>
         <a href="users_manager.php" class="side-btn"><i class="fas fa-users"></i><span>Users Manager</span></a>
         <a href="create_user.php" class="side-btn"><i class="fas fa-user-plus"></i><span>Create User</span></a>
