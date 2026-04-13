@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS staff (
     status ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP NULL,
-    email VARCHAR(100) NULL
+    email VARCHAR(100) NULL,
+    reset_token_hash VARCHAR(64) NULL,
+    reset_token_expires DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Insert staff login account (plain text password used: admin123)
