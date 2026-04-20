@@ -41,7 +41,7 @@ if (isset($_POST['delete_id'])) {
                 unlink($imgRow['image']);
             }
             $stmt->close();
-            header("Location: dashboard.php?msg=streamer_deleted");
+            header("Location: streamers_panel.php?msg=streamer_deleted");
             exit();
         } else {
             $error = "Delete failed: " . $stmt->error;
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
                 $stmt->bind_param("ssssi", $name, $image, $link1, $link2, $id);
 
                 if ($stmt->execute()) {
-                    header("Location: dashboard.php?msg=streamer_updated");
+                    header("Location: streamers_panel.php?msg=streamer_updated");
                     exit();
                 } else {
                     $error = $stmt->error;
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['delete_id'])) {
                 $stmt->bind_param("ssss", $name, $image, $link1, $link2);
 
                 if ($stmt->execute()) {
-                    header("Location: dashboard.php?msg=streamer_added");
+                    header("Location: streamers_panel.php?msg=streamer_added");
                     exit();
                 } else {
                     $error = $stmt->error;

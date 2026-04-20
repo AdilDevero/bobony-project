@@ -1,6 +1,20 @@
 <?php
 require 'config.php';
 
+if (!function_exists('icon_for_url')) {
+    function icon_for_url($url) {
+        $url = strtolower($url);
+        if (strpos($url, 'kick') !== false) return 'fa-brands fa-kickstarter';
+        if (strpos($url, 'instagram') !== false || strpos($url, 'ig.me') !== false) return 'fa-brands fa-instagram';
+        if (strpos($url, 'twitch') !== false) return 'fa-brands fa-twitch';
+        if (strpos($url, 'youtube') !== false || strpos($url, 'youtu.be') !== false) return 'fa-brands fa-youtube';
+        if (strpos($url, 'tiktok') !== false) return 'fa-brands fa-tiktok';
+        if (strpos($url, 'discord') !== false) return 'fa-brands fa-discord';
+        if (strpos($url, 'twitter') !== false || strpos($url, 'x.com') !== false) return 'fa-brands fa-twitter';
+        return 'fa-solid fa-link';
+    }
+}
+
 $sql = "SELECT * FROM team_members ORDER BY FIELD(role, 'Owner & Developer', 'Owner', 'Admin RP', 'Helper RP'), id ASC";
 $result = $conn->query($sql);
 $team_by_role = [];
@@ -386,10 +400,10 @@ if ($result && $result->num_rows > 0) {
                     <?php if (!empty($m['link1']) || !empty($m['link2'])): ?>
                         <div class="socials">
                             <?php if (!empty($m['link1'])): ?>
-                                <a href="<?php echo htmlspecialchars($m['link1']); ?>"><i class="fa-solid fa-link"></i></a>
+                                <a href="<?php echo htmlspecialchars($m['link1']); ?>"><i class="<?php echo icon_for_url($m['link1']); ?>"></i></a>
                             <?php endif; ?>
                             <?php if (!empty($m['link2'])): ?>
-                                <a href="<?php echo htmlspecialchars($m['link2']); ?>"><i class="fa-solid fa-link"></i></a>
+                                <a href="<?php echo htmlspecialchars($m['link2']); ?>"><i class="<?php echo icon_for_url($m['link2']); ?>"></i></a>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
