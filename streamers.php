@@ -36,6 +36,9 @@ body{
     background:#070707;
     color:white;
     overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
 }
 body::before{
     content:"";
@@ -261,7 +264,7 @@ nav ul li a:hover,
     padding:40px 20px;
     color:#666;
     border-top:1px solid rgba(255,0,0,0.2);
-    margin-top:80px;
+    margin-top:auto;
 }
 </style>
 </head>

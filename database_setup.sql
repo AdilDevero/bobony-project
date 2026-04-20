@@ -89,6 +89,16 @@ CREATE TABLE IF NOT EXISTS reglements (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO reglements (category, rule_text, ban_time) 
 VALUES ('New Rules', 'Placeholder rule for New Rules category.', '');
+
+CREATE TABLE IF NOT EXISTS team_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    role VARCHAR(100) NOT NULL DEFAULT 'Admin RP',
+    image VARCHAR(255) NULL,
+    link1 VARCHAR(255) NULL,
+    link2 VARCHAR(255) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 -- If you already created the table before this update, run:
 -- ALTER TABLE streamers CHANGE profile image VARCHAR(255) NULL;
 -- (and optionally DROP COLUMN profile if you don't need it)

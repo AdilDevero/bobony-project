@@ -460,6 +460,7 @@ logAction('last_login', 'User logged in', $user_id, $conn);
             <a href="reglement_panel.php" class="side-btn"><i class="fas fa-gavel"></i><span>Reglement</span></a>
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'owner'): ?>
         <a href="users_manager.php" class="side-btn"><i class="fas fa-users"></i><span>Users Manager</span></a>
+        <a href="team_panel.php" class="side-btn"><i class="fas fa-user-shield"></i><span>Team Manager</span></a>
         <a href="create_user.php" class="side-btn"><i class="fas fa-user-plus"></i><span>Create User</span></a>
     <?php endif; ?>
     <div style="flex:1"></div>
