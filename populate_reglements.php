@@ -60,7 +60,10 @@ $rules = [
     ['Blacklisted Words', 'l9bar.', ''],
     ['Blacklisted Words', 'klawa.', ''],
     ['Blacklisted Words', 'Punishment:', ''],
-    ['Blacklisted Words', "1st — Warning\n2nd — Ban 48h\nRepeated", '']
+    ['Blacklisted Words', "1st — Warning\n2nd — Ban 48h\nRepeated", ''],
+
+    // New Rules
+    ['New Rules', 'Placeholder rule for New Rules category.', '']
 ];
 
 // Truncate table to restart fresh if run multiple times

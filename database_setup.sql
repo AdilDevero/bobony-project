@@ -87,7 +87,8 @@ CREATE TABLE IF NOT EXISTS reglements (
     ban_time VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+INSERT INTO reglements (category, rule_text, ban_time) 
+VALUES ('New Rules', 'Placeholder rule for New Rules category.', '');
 -- If you already created the table before this update, run:
 -- ALTER TABLE streamers CHANGE profile image VARCHAR(255) NULL;
 -- (and optionally DROP COLUMN profile if you don't need it)
