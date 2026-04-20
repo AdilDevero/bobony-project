@@ -434,7 +434,8 @@ if(isset($_GET['edit'])){
                         'Illegal Rules', 
                         'Streamer Rules', 
                         'Heist / Braquages Rules', 
-                        'Blacklisted Words'
+                        'Blacklisted Words',
+                        'New Rules'
                     ];
                     $current_cat = $edit_mode ? $edit_data['category'] : '';
                     foreach($categories as $cat) {
