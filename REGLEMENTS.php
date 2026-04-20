@@ -37,6 +37,7 @@ if ($result && $result->num_rows > 0) {
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * {
@@ -88,6 +89,24 @@ if ($result && $result->num_rows > 0) {
             color:red;
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
         .container {
             padding: 150px 10% 60px;
         }
@@ -136,12 +155,75 @@ if ($result && $result->num_rows > 0) {
             margin-top: 50px;
         }
 
-        @media(max-width:768px){
-            header{
-                flex-direction: column;
-            }
+        @media(max-width:900px){
             nav{
-                margin-top: 15px;
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1002;
+            }
+
+            nav ul{
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 300px;
+                max-width: 85%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: 30px;
+                padding: 90px 30px 40px;
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-right: 1px solid rgba(255,0,0,0.2);
+                box-shadow: 5px 0 25px rgba(0,0,0,0.9);
+                z-index: 1001;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li a {
+                font-size: 18px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .overlay {
+                transition: opacity 0.4s ease;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .overlay.active {
+                display: block;
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .container {
+                padding: 120px 20px 60px;
+            }
+
+            .section h2 {
+                font-size: 24px;
+            }
+        }
+        
+        @media(max-width:600px){
+            .logo{
+                font-size:18px;
+            }
+            .rule-box {
+                padding: 15px;
             }
         }
     </style>
@@ -151,7 +233,10 @@ if ($result && $result->num_rows > 0) {
 
 <nav>
     <div class="logo">Bobony Family</div>
-    <ul>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul id="menu">
         <li><a href="index.php">Home</a></li>
         <li><a href="discord.php">Discord</a></li>
         <li><a href="team.php">Team</a></li>
@@ -162,6 +247,8 @@ if ($result && $result->num_rows > 0) {
         <li><a href="login.php" style="color:red;">Staff Login</a></li>
     </ul>
 </nav>
+
+<div class="overlay" onclick="toggleMenu()"></div>
 
 <div class="container">
 
@@ -211,5 +298,23 @@ if ($result && $result->num_rows > 0) {
     © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </footer>
 <script src="animations.js"></script>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        const overlay = document.querySelector(".overlay");
+        const icon = document.querySelector(".menu-toggle i");
+        
+        menu.classList.toggle("active");
+        overlay.classList.toggle("active");
+
+        if (menu.classList.contains("active")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+    }
+</script>
 </body>
 </html>

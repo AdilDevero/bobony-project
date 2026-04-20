@@ -88,6 +88,24 @@ nav ul li a:hover,
 .active{
     color:red;
 }
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
 .header{
     padding:160px 20px 60px;
     text-align:center;
@@ -163,8 +181,66 @@ nav ul li a:hover,
     color:black;
 }
 @media(max-width:900px){
-    nav{padding:20px;}
-    .team-container{padding:40px 20px 100px;}
+    nav{
+        padding: 15px 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+        z-index: 1002;
+    }
+
+    nav ul{
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 300px;
+        max-width: 85%;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 30px;
+        padding: 90px 30px 40px;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-right: 1px solid rgba(255,0,0,0.2);
+        box-shadow: 5px 0 25px rgba(0,0,0,0.9);
+        z-index: 1001;
+    }
+
+    nav ul.active {
+        left: 0;
+    }
+
+    nav ul li a {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .overlay {
+        transition: opacity 0.4s ease;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .overlay.active {
+        display: block;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .team-container{padding:40px 20px 100px; gap: 20px;}
+    .header h1{font-size:30px;}
+}
+
+@media(max-width:600px){
+    .logo{font-size:18px;}
+    .header{padding:120px 20px 40px;}
 }
 
 .empty{
@@ -194,7 +270,10 @@ nav ul li a:hover,
 
 <nav>
     <div class="logo">Bobony Family</div>
-    <ul>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul id="menu">
 <li><a href="index.php">Home</a></li>
 <li><a href="discord.php">Discord</a></li>
 <li><a href="team.php">Team</a></li>
@@ -205,6 +284,8 @@ nav ul li a:hover,
 <li><a href="login.php" style="color:red;">Staff Login</a></li>
     </ul>
 </nav>
+
+<div class="overlay" onclick="toggleMenu()"></div>
 
 <section class="header">
     <h1>Our <span>Streamers</span></h1>
@@ -250,5 +331,23 @@ nav ul li a:hover,
 © 2026 Bobony Roleplay - All Rights Reserved Dev by Anass
 </div>
 <script src="animations.js"></script>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        const overlay = document.querySelector(".overlay");
+        const icon = document.querySelector(".menu-toggle i");
+        
+        menu.classList.toggle("active");
+        overlay.classList.toggle("active");
+
+        if (menu.classList.contains("active")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+    }
+</script>
 </body>
 </html>

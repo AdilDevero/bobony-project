@@ -96,6 +96,17 @@
             color: white;
         }
 
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
         /* HEADER */
 
         .header {
@@ -198,40 +209,82 @@
         /* MOBILE */
 
         @media(max-width:900px) {
-
             nav {
-                padding: 20px
+                padding: 15px 20px;
             }
 
             .menu-toggle {
-                display: block
+                display: block;
+                z-index: 1002;
             }
 
             nav ul {
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: #0d0d0d;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 300px;
+                max-width: 85%;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
                 flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                padding: 20px 0;
-                display: none;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: 30px;
+                padding: 90px 30px 40px;
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-right: 1px solid rgba(255,0,0,0.2);
+                box-shadow: 5px 0 25px rgba(0,0,0,0.9);
+                z-index: 1001;
             }
 
             nav ul.active {
-                display: flex
+                left: 0;
+            }
+
+            nav ul li a {
+                font-size: 18px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .overlay {
+                transition: opacity 0.4s ease;
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .overlay.active {
+                display: block;
+                opacity: 1;
+                pointer-events: all;
             }
 
             .team-container {
                 padding: 20px;
+                gap: 20px;
             }
 
             .header h1 {
-                font-size: 32px;
+                font-size: 30px;
             }
 
+            .category-title {
+                padding: 30px 20px 15px;
+                font-size: 24px;
+            }
+
+        }
+        
+        @media(max-width:600px){
+            .logo{
+                font-size:18px;
+            }
+            .header {
+                padding: 120px 20px 40px;
+            }
         }
     </style>
 </head>
@@ -260,6 +313,8 @@
         </ul>
 
     </nav>
+
+    <div class="overlay" onclick="toggleMenu()"></div>
 
     <section class="header">
 
@@ -529,12 +584,24 @@
         </div>
     </section>
 
+    <script src="animations.js"></script>
     <script>
-
         function toggleMenu() {
-            document.getElementById("menu").classList.toggle("active");
-        }
+            const menu = document.getElementById("menu");
+            const overlay = document.querySelector(".overlay");
+            const icon = document.querySelector(".menu-toggle i");
+            
+            menu.classList.toggle("active");
+            overlay.classList.toggle("active");
 
+            if (menu.classList.contains("active")) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+            } else {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+            }
+        }
     </script>
 </body>
 
